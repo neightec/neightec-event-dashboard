@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NeightWeddingPagenotfoundComponent } from './component/neight-wedding-pagenotfound/neight-wedding-pagenotfound.component';
-import { NeightWeddingQrCodeComponent } from './component/neight-wedding-qr-code/neight-wedding-qr-code.component';
 import { NeightWeddingHomeComponent } from './component/neight-wedding-home/neight-wedding-home.component';
 
 const routes: Routes = [

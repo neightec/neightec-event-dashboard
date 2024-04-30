@@ -16,7 +16,6 @@ import { neightEnvironment } from 'src/environments/environment';
 import { LoginService } from './services/login.service';
 import { NeightWeddingPagenotfoundComponent } from './component/neight-wedding-pagenotfound/neight-wedding-pagenotfound.component';
 import { FetchGuestService } from './services/fetch-guest.service';
-import { NeightWeddingQrCodeComponent } from './component/neight-wedding-qr-code/neight-wedding-qr-code.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -39,8 +38,7 @@ import { EffectsModule } from '@ngrx/effects';
     ],
     declarations: [
         AppComponent,
-        NeightWeddingPagenotfoundComponent,
-        NeightWeddingQrCodeComponent,
+        NeightWeddingPagenotfoundComponent
     ],
     providers: [
         NeightApiService,
