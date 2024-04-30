@@ -7,7 +7,7 @@
 node_modules/
 dist/
 
-frontend/package-lock.json
+package-lock.json
 
 # Compiled Java class files
 *.class
