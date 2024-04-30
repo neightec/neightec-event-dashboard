@@ -1,0 +1,82 @@
+/**
+ * Dashboard button
+ * @date 19.2.22
+ * @author natsu
+**/
+
+//TODO maybe @import _dashboard-button-variables.scss 
+//to have better overview of vars if many rules are defined
+
+$mixin-dashboard-button-images-background-size: 4rem 4rem !default;
+$mixin-dashboard-button-images-width: 4rem !default;
+$mixin-dashboard-button-images-height: 4rem !default;
+$mixin-dashboard-button-images-margin: 0 auto !default;
+
+$app-dashboard-button-padding: 0 0.5rem !default;
+
+$neight-dashboard-button-display: block !default;
+$neight-dashboard-button-min-width: 8rem !default;
+$neight-dashboard-button-min-height: 8rem !default;
+$neight-dashboard-button-background-color: $neight-red !default;
+$neight-dashboard-button-border-radius: 0.25rem !default;
+$neight-dashboard-button-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25) !default;
+
+$neight-dashboard-button-div-padding-top: 0.75rem !default;
+
+$neight-dashboard-button-title-color: $neight-white !default;
+$neight-dashboard-button-title-display: flex !default;
+$neight-dashboard-button-title-justify-content: center !default;
+
+@mixin dashboard-button-images() {
+    // background-size: $mixin-dashboard-button-images-background-size;
+    // width: $mixin-dashboard-button-images-width;
+    // height: $mixin-dashboard-button-images-height;
+    color: white; //todo change color on SVGs images
+    margin: $mixin-dashboard-button-images-margin;
+    font-size: 36px;
+}
+
+app-dashboard-button {
+
+    padding: $app-dashboard-button-padding;
+
+    .neight-dashboard-button {
+        display: $neight-dashboard-button-display;
+        background-color: $neight-dashboard-button-background-color;
+        min-width: $neight-dashboard-button-min-width;
+        min-height: $neight-dashboard-button-min-height;
+        border-radius: $neight-dashboard-button-border-radius;
+        box-shadow: $neight-dashboard-button-box-shadow;
+        flex-direction: row;
+
+        > div {
+            padding-top: $neight-dashboard-button-div-padding-top;
+            display: flex;
+        }
+
+        .neight-dashboard-button-icon {
+            mat-icon {
+                //todo
+                @include dashboard-button-images();
+            }
+        }
+
+        .neight-dashboard-button-title {
+            color: $neight-dashboard-button-title-color;
+            display: $neight-dashboard-button-title-display;
+            justify-content: $neight-dashboard-button-title-justify-content;
+            max-width: 128px;
+
+            p {
+                text-align: center;
+            }
+        }
+
+        &:hover {
+            .neight-dashboard-button-title {
+                color: red; //todo
+            }
+        }
+    }
+
+}

@@ -1,0 +1,37 @@
+/**
+ * Dashboard Search Engine
+ * @date 28.3.22
+ * @author natsu
+**/
+
+app-dashboard-search-engine {
+    width: 100%;
+
+    .neight-dashboard-search-engine-button {
+        display: flex;
+        min-height: 8rem;
+        justify-content: center;
+
+        .neight-dashboard-search-engine-button-icon {
+            border-radius: 50px;
+            background-color: #A00E0E;
+            cursor: pointer;
+
+            .mat-icon {
+                color: white;
+                margin: 0 auto;
+                font-size: 100px;
+            }
+        }
+
+    }
+
+    .neight-dashboard-search-engine-options {
+        display: flex;
+        justify-content: center;
+
+        > div {
+            padding: 0 0.25rem;
+        }
+    }
+}

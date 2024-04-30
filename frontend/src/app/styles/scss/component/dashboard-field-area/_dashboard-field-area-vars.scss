@@ -1,0 +1,21 @@
+/**
+ * Dashboard field
+ * @date 24.2.22
+ * @author natsu
+ * Purpose: test if vars scss are necessary
+**/
+
+// minus - need to make sure that file is save automatically or manually. otherwise vars wont be recognized
+
+$neight-dashboard-field-area-background-color: $neight-white !default;
+$neight-dashboard-field-area-color: $neight-red !default;
+$neight-dashboard-field-area-width: 100% !default;
+
+//neight dashboard field - fixed fields
+$neight-dashboard-field-area-fixed-fields-min-height: 10rem !default;
+$neight-dashboard-field-area-fixed-fields-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+//neight dashboard field - add fields
+$neight-dashboard-field-area-add-fields-min-height: 10rem !default;
+$neight-dashboard-field-area-add-fields-border: 2px dashed $neight-black !default;
+$neight-dashboard-field-area-add-fields-border-radius: 0.25rem !default !default;

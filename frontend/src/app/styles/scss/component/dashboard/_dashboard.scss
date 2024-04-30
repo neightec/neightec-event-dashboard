@@ -1,0 +1,15 @@
+
+/**
+ * Neight Dashboard - TODO create howto document scss clearly
+ * @date 8.2.22
+ * @author natsu
+**/
+
+$neight-app-neight-dashboard-background-color: $neight-white !default;
+$neight-app-neight-dashboard-height-min: 100vh !default; //TODO change to something else
+
+.neight-dashboard {
+    background-color: $neight-app-neight-dashboard-background-color;
+    min-height: $neight-app-neight-dashboard-height-min;
+    display: flex; //todo
+}

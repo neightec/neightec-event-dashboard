@@ -1,0 +1,66 @@
+/**
+ * Dashboard field
+ * @date 28.2.22
+ * @author natsu
+**/
+
+app-dashboard-header {
+
+    display: inline-flex;
+    width: 100%;
+
+    .neight-dashboard-button-header-col {
+        display: flex;
+        width: 100%;
+
+        span {
+            font-size: 50px;
+        }
+
+        &:last-child {
+            justify-content: flex-end;
+        }
+
+        .neight-dashboard-button-header {
+            background-color: white;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 0.25rem 0.5rem;
+            cursor: pointer;
+
+            -moz-border-radius: 80px;
+            -webkit-border-radius: 80px;
+            border-radius: 80px;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    
+            .neight-dashboard-button-header-circle {
+
+                mat-icon {
+                    color: #A00E0E;
+                }
+                
+                .neight-dashboard-button-header-notification { 
+                    display: flex;
+                    position: relative;
+                    max-height: 50px;
+
+                    .neight-dashboard-button-header-notification-item {
+                        background-color: #DA6F6F;
+                        display: block;
+                        width: 10px;
+                        height: 10px;
+                        right: 10%;
+                        position: absolute;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+
+}
