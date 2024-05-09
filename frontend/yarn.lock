@@ -1280,12 +1280,12 @@
   resolved "https://registry.npmjs.org/@carbon/icons/-/icons-11.14.0.tgz#7a21ff71efc32f461c9ce66f955b8281bff2a3ca"
   integrity sha512-6XaySbscz1ubJ/3GtyXB8qJpcAL8kcIzBA6JZpFCcha43tuB1Kps87ADj/v3yx0sLPxyIzRWgkw2n1bnkAcsNA==
 
-"@carbon/icons@^11.40.0":
-  version "11.40.0"
-  resolved "https://registry.npmjs.org/@carbon/icons/-/icons-11.40.0.tgz#93e0385bfb14eca1fcddb236e65ffe82892b5795"
-  integrity sha512-D3ckVSdam66Nueg2OH/uIEbDv+VL0uVo226acMf/FqwZ9zWPIUf3CPLN39+UVHxx35zQPY39QSi4fu/6TBs6wg==
+"@carbon/icons@^11.41.0":
+  version "11.41.0"
+  resolved "https://registry.npmjs.org/@carbon/icons/-/icons-11.41.0.tgz#276eb28521fbf373e17d4111fd37feac6e18c0b8"
+  integrity sha512-9RGaOnihPQx74yBQ0UnEr9JJ+e2aa/J+tmTG/sZ203q2hfoeMF2PqipwOhNS1fqCnyW1zvsYQNydUsNIDzCqaA==
   dependencies:
-    "@ibm/telemetry-js" "^1.2.1"
+    "@ibm/telemetry-js" "^1.5.0"
 
 "@carbon/layout@^11.22.0":
   version "11.22.0"
@@ -1512,7 +1512,7 @@
   resolved "https://registry.npmjs.org/@ibm/plex/-/plex-6.0.0-next.6.tgz#5b4ab81a84ddb06651fdf684521927cdce135b79"
   integrity sha512-B3uGruTn2rS5gweynLmfSe7yCawSRsJguJJQHVQiqf4rh2RNgJFu8YLE2Zd/JHV0ZXoVMOslcXP2k3hMkxKEyA==
 
-"@ibm/telemetry-js@^1.2.1", "@ibm/telemetry-js@^1.5.0":
+"@ibm/telemetry-js@^1.5.0":
   version "1.5.0"
   resolved "https://registry.npmjs.org/@ibm/telemetry-js/-/telemetry-js-1.5.0.tgz#ab73e0988088e2cbb01a7086a31ccc3826a81ba0"
   integrity sha512-RwOohLaWw97vEEwhPnlDJlORuworVOjC2R6WzSVlG7suG08qTMLVRVpnnunUCSQHyxP1Y30V9IF5vsxVrMBOHg==

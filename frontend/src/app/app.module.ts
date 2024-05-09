@@ -47,7 +47,11 @@ import {
   TagModule,
   TilesModule,
   UIShellModule,
+  ThemeModule
 } from 'carbon-components-angular';
+
+// @ts-ignore
+import * as Icons from '@carbon/icons';
 import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
 
 @NgModule({
@@ -66,8 +70,11 @@ import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-
         //   NeightWeddingGuestListEffects,
         //   NeightWeddingGuestFamilyListEffects
         // ]),
+        IconModule,
+        UIShellModule,
+        ThemeModule,
         SearchModule,
-        SkeletonModule
+        SkeletonModule,
       ],
       declarations: [
         AppComponent,
@@ -82,4 +89,20 @@ import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  groupedIcons: any[] = [];
+  constructor(protected iconService: IconService) {
+    const iconMap = new Map();
+
+    for (const [_, descriptor] of Object.entries(Icons) as any) {
+      this.iconService.register(descriptor as object);
+      if (!iconMap.has(descriptor['name'])) {
+        iconMap.set(descriptor['name'], []);
+      }
+      iconMap.get(descriptor['name']).push(descriptor);
+    }
+    this.groupedIcons = Array.from(iconMap.values());
+  }
+
+}

@@ -1,5 +1,18 @@
 <p>neight-tech-wedding-home works!</p>
 <div>
-  <ibm-search placeholder="Suche" [autocomplete]="'off'" [size]="'md'">
-  </ibm-search>
+  <div [ibmTheme]="theme">
+    <ibm-sidenav>
+        <ibm-sidenav-item [route]="['foo']" [useRouter]="true">
+            <svg ibmIcon="fade" size="16"></svg>
+            Link
+        </ibm-sidenav-item>
+        <ibm-sidenav-item [route]="['bar']" [useRouter]="true">
+            <svg ibmIcon="fade" size="16"></svg>
+            Link
+        </ibm-sidenav-item>
+    </ibm-sidenav>
+  </div>
+  <div style="margin-left: 256px">
+      <router-outlet></router-outlet>
+  </div>
 </div>

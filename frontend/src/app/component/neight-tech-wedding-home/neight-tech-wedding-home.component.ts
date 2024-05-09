@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class NeightTechWeddingHomeComponent {
 
+  theme = 'g90';
 }
