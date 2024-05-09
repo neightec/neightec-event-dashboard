@@ -18,6 +18,37 @@ import { NeightWeddingPagenotfoundComponent } from './component/neight-wedding-p
 import { FetchGuestService } from './services/fetch-guest.service';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import {
+  AccordionModule,
+  BreadcrumbModule,
+  ButtonModule,
+  CheckboxModule,
+  DatePickerModule,
+  DialogModule,
+  FileUploaderModule,
+  GridModule,
+  IconModule,
+  IconService,
+  InlineLoadingModule,
+  InputModule,
+  LoadingModule,
+  ModalModule,
+  NotificationModule,
+  NumberModule,
+  PaginationModule,
+  PlaceholderModule,
+  ProgressIndicatorModule,
+  SearchModule,
+  SkeletonModule,
+  SliderModule,
+  StructuredListModule,
+  TableModule,
+  TabsModule,
+  TagModule,
+  TilesModule,
+  UIShellModule,
+} from 'carbon-components-angular';
+import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
 
 @NgModule({
     imports: [
@@ -35,16 +66,19 @@ import { EffectsModule } from '@ngrx/effects';
         //   NeightWeddingGuestListEffects,
         //   NeightWeddingGuestFamilyListEffects
         // ]),
-    ],
-    declarations: [
+        SearchModule,
+        SkeletonModule
+      ],
+      declarations: [
         AppComponent,
-        NeightWeddingPagenotfoundComponent
+        NeightWeddingPagenotfoundComponent,
+        NeightTechWeddingHomeComponent,
     ],
     providers: [
-        NeightApiService,
-        LoginService,
-        FetchGuestService,
-        { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
+      NeightApiService,
+      LoginService,
+      FetchGuestService,
+      { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
     ],
     bootstrap: [AppComponent]
 })

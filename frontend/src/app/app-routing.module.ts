@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NeightWeddingPagenotfoundComponent } from './component/neight-wedding-pagenotfound/neight-wedding-pagenotfound.component';
-import { NeightWeddingHomeComponent } from './component/neight-wedding-home/neight-wedding-home.component';
+import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
 
 const routes: Routes = [
-  { path: 'home',  component: NeightWeddingHomeComponent },
+  { path: 'home',  component: NeightTechWeddingHomeComponent },
   // { path: 'guest-check-validation', component: NeightWeddingQrCodeComponent }, 
   // { path: 'guest-check-validation/:id', component: NeightCheckGuestValidationComponent},
   // { path: 'admin',           component: NeightWeddingAdminComponent },
