@@ -3,24 +3,13 @@
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 // @include angular-material-theme($frontend-theme);
-@import 'carbon-components/scss/globals/scss/styles';
-
-/* You can add global styles to this file, and also import other style files */
 
 //Global and basic scss
 @import './app/styles/scss/global/global';
 
+@import './app/styles/scss/carbon/theme';
+@import './app/styles/scss/carbon/overwrites';
+
+
 //Stlyes
 @import './app/styles/scss/component/component';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-// todo move this
-.neight-toast-alert .mat-snack-bar-container {
-  background-color: $neight-red;
-}
-
-.neight-toast-success .mat-snack-bar-container {
-  background-color: $neight-green;
-}
