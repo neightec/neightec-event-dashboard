@@ -8,4 +8,12 @@
       </tr>
     </tbody> -->
   </ibm-table>
+  <ibm-pagination
+    [model]="guestWeddingModel"
+    [showPageInput]="true"
+    [itemsPerPageOptions]="itemsPerPageOptions"
+    [translations]="translations"
+    (selectPage)="selectPage($event)"
+  >
+  </ibm-pagination>
 </ibm-table-container>

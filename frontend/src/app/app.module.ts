@@ -78,7 +78,8 @@ import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wed
         SearchModule,
         SkeletonModule,
         TabsModule,
-        TableModule
+        TableModule,
+        PaginationModule
       ],
       declarations: [
         AppComponent,

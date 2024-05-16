@@ -2,7 +2,7 @@ import { Guest } from "../models/guest";
 import { User } from "../models/user";
 
 export const mockGuests: Guest[] = [];
-const numGuests = 10; // Number of guests to generate
+const numGuests = 30; // Number of guests to generate
 
 for (let i = 0; i < numGuests; i++) {
   const guest: Guest = {

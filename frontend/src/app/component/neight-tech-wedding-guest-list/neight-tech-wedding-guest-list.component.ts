@@ -11,6 +11,23 @@ import { Guest } from 'src/app/models/guest';
 })
 export class NeightTechWeddingGuestListComponent implements OnInit, AfterContentChecked {
   
+  private readonly defaultPageLength = 15;
+  private readonly defaultPage = 1;
+  readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
+
+  // TODO translations
+  translations = {
+    ITEMS_PER_PAGE: 'ITEMS_PER_PAGE',
+    OPEN_LIST_OF_OPTIONS: 'OPEN_LIST_OF_OPTIONS',
+    BACKWARD: 'BACKWARD',
+    FORWARD: 'FORWARD',
+    TOTAL_ITEMS_UNKNOWN: 'TOTAL_ITEMS_UNKNOWN',
+    TOTAL_ITEMS: 'TOTAL_ITEMS',
+    TOTAL_ITEM: 'TOTAL_ITEM',
+    OF_LAST_PAGES: 'OF_LAST_PAGES',
+    OF_LAST_PAGE: 'OF_LAST_PAGES',
+  };
+
   guestWeddingModel: TableModel = new TableModel();
   guests: TableModel = new TableModel();
   private guestsSubscription: Subscription | null = null;
@@ -21,6 +38,8 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   ngOnInit(): void {
     this.guestWeddingModel.header = this.createTableHeader();
     this.guests.header = this.createTableHeader();
+    this.guestWeddingModel.currentPage = this.defaultPage;
+    this.guestWeddingModel.pageLength = this.defaultPageLength;
   }
 
 
@@ -29,6 +48,8 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
       this.guests.data = this.loadData();
       if (this.guests.data) {
         this.guestWeddingModel.data = this.guests.data;
+        this.guestWeddingModel.totalDataLength = mockGuests.length; // TODO change this
+        this.selectPage(this.guestWeddingModel.currentPage);
       }
     }
   }
@@ -61,5 +82,12 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
       ])
     }
     return null;
+  }
+
+  selectPage(page: number): void {
+    const offset = this.guestWeddingModel.pageLength * (page - 1);
+    const pageRawData = this.guests.data.slice(offset, offset + this.guestWeddingModel.pageLength);
+    this.guestWeddingModel.data = pageRawData;
+    this.guestWeddingModel.currentPage = page;
   }
 }
