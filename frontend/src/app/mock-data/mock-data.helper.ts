@@ -1,4 +1,5 @@
 import { Guest } from "../models/guest";
+import { User } from "../models/user";
 
 export const mockGuests: Guest[] = [];
 const numGuests = 10; // Number of guests to generate
@@ -13,3 +14,10 @@ for (let i = 0; i < numGuests; i++) {
   };
   mockGuests.push(guest);
 }
+
+export const mockUser: User = {
+  id: 1,
+  name: 'Max Mustermann',
+  email: 'max.mustermann@mail.com',
+  phone: '+41123456789',
+};

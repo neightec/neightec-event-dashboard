@@ -1,9 +1,27 @@
 <div [ibmTheme]="theme">
   <ibm-sidenav>
-      <ibm-sidenav-item *ngFor="let item of menuItems">
+    <div>
+      <span>
+        Menu
+      </span>
+    </div>
+    <div>
+      <ibm-sidenav-item *ngFor="let item of menuItems" (click)="changeRouter()">
           <svg ibmIcon="{{ item.icon }}" size="{{ item.size }}"></svg>
           {{ item.title }}
       </ibm-sidenav-item>
+    </div>
+    <div>
+      <span>
+        Settings
+      </span>
+    </div>
+    <div>
+      <ibm-sidenav-item *ngFor="let item of menuSettingItems" (click)="changeRouter()">
+          <svg ibmIcon="{{ item.icon }}" size="{{ item.size }}"></svg>
+          {{ item.title }}
+      </ibm-sidenav-item>
+    </div>
   </ibm-sidenav>
 </div>
 <div>

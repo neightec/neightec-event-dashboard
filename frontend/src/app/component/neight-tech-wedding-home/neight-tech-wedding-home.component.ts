@@ -20,5 +20,27 @@ export class NeightTechWeddingHomeComponent {
       icon: 'activity',
       size: '16'
     },
+    {
+      title: 'Budget',
+      icon: 'currency',
+      size: '16'
+    },
   ]
+
+  menuSettingItems: any = [
+    {
+      title: 'Account',
+      icon: 'settings',
+      size: '16'
+    },
+    {
+      title: 'Help & Support',
+      icon: 'lifesaver',
+      size: '16'
+    },
+  ]
+
+  public changeRouter(): void {
+    console.warn("test changeRouter");
+  }
 }
