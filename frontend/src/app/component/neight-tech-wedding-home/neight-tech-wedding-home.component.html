@@ -1,10 +1,13 @@
+<div [ibmTheme]="theme">
+  <ibm-sidenav>
+      <ibm-sidenav-item *ngFor="let item of menuItems">
+          <svg ibmIcon="{{ item.icon }}" size="{{ item.size }}"></svg>
+          {{ item.title }}
+      </ibm-sidenav-item>
+  </ibm-sidenav>
+</div>
 <div>
-  <div [ibmTheme]="theme">
-    <ibm-sidenav>
-        <ibm-sidenav-item *ngFor="let item of menuItems">
-            <svg ibmIcon="{{ item.icon }}" size="{{ item.size }}"></svg>
-            {{ item.title }}
-        </ibm-sidenav-item>
-    </ibm-sidenav>
-  </div>
+  <neight-tech-wedding-dashboard>
+  
+  </neight-tech-wedding-dashboard>
 </div>

@@ -53,6 +53,8 @@ import {
 // @ts-ignore
 import * as Icons from '@carbon/icons';
 import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
+import { NeightTechWeddingDashboardComponent } from './component/neight-tech-wedding-dashboard/neight-tech-wedding-dashboard.component';
+import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wedding-guest-list/neight-tech-wedding-guest-list.component';
 
 @NgModule({
     imports: [
@@ -75,11 +77,14 @@ import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-
         ThemeModule,
         SearchModule,
         SkeletonModule,
+        TabsModule,
       ],
       declarations: [
         AppComponent,
         NeightWeddingPagenotfoundComponent,
         NeightTechWeddingHomeComponent,
+        NeightTechWeddingDashboardComponent,
+        NeightTechWeddingGuestListComponent,
     ],
     providers: [
       NeightApiService,
