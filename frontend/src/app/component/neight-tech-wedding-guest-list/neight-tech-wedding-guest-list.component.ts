@@ -3,6 +3,8 @@ import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angula
 import { Subscription } from 'rxjs';
 import { mockGuests } from 'src/app/mock-data/mock-data.helper';
 import { Guest } from 'src/app/models/guest';
+import { FetchGuestService } from 'src/app/services/fetch-guest.service';
+import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 
 @Component({
   selector: 'neight-tech-wedding-guest-list',
@@ -33,6 +35,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   private guestsSubscription: Subscription | null = null;
   
   constructor(
+    protected guestWeddingListService: GuestWeddingListService
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +74,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   }
 
   private loadData(): TableItem[][] {
-    let _guests: Guest[] = mockGuests;
+    let _guests: Guest[] = this.guestWeddingListService.fetchWeddingList();
     if (_guests) {
       return _guests.map((guest) => [
         new TableItem({data: guest.id}),
