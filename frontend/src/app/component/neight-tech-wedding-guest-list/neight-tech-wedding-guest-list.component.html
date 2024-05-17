@@ -1,6 +1,9 @@
 <ibm-table-container>
   <ibm-table
     [model]="guestWeddingModel"
+    (sort)="sort($event)"
+    [striped]="false"
+    [showSelectionColumn]="false"
   >
     <!-- <tbody>
       <tr>

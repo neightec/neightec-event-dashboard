@@ -90,4 +90,18 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     this.guestWeddingModel.data = pageRawData;
     this.guestWeddingModel.currentPage = page;
   }
+
+  // TODO seems not working
+  sort(columnIndex: number) {
+    if (this.guests.header[columnIndex].sorted) {
+      this.guests.header[columnIndex].ascending = this.guests.header[columnIndex].descending;
+      this.guestWeddingModel.header[columnIndex].ascending =
+        this.guestWeddingModel.header[columnIndex].descending;
+    }
+    this.guestWeddingModel.data = [];
+    this.guestWeddingModel.sort(columnIndex);
+    this.guests.sort(columnIndex);
+
+    this.selectPage(this.guestWeddingModel.currentPage);
+  }
 }
