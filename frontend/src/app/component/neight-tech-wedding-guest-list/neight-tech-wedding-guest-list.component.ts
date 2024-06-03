@@ -1,6 +1,10 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
+import { initDashboard, loadDataDashboardState } from 'src/app/features/dashboard/store/dashboard.actions';
+import { selectDashboard } from 'src/app/features/dashboard/store/dashboard.selectors';
+import { DashboardState } from 'src/app/features/dashboard/store/dashboard.state';
 import { mockGuests } from 'src/app/mock-data/mock-data.helper';
 import { Guest } from 'src/app/models/guest';
 import { FetchGuestService } from 'src/app/services/fetch-guest.service';
@@ -16,6 +20,8 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   private readonly defaultPageLength = 15;
   private readonly defaultPage = 1;
   readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
+
+  tableData$;
 
   // TODO translations
   translations = {
@@ -33,8 +39,11 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   guestWeddingModel: TableModel = new TableModel();
   guests: TableModel = new TableModel();
   private guestsSubscription: Subscription | null = null;
+
+  dataSource: any;
   
   constructor(
+    private store: Store,
     protected guestWeddingListService: GuestWeddingListService
   ) {}
 
@@ -43,6 +52,19 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     this.guests.header = this.createTableHeader();
     this.guestWeddingModel.currentPage = this.defaultPage;
     this.guestWeddingModel.pageLength = this.defaultPageLength;
+    debugger;
+    this.guestWeddingListService.fetchWeddingList3().subscribe(data => {
+      console.log("test data: ", data);
+    })
+    this.store.dispatch(initDashboard({ data: this.dataSource }));
+    // this.store.select(selectDashboard).subscribe((state: DashboardState) => {
+    //   // this.tableViewState = this.stateWithConditions(
+    //     //     this.tableView || defaultStates.tableView,
+    //     //     this.condition
+    //     // );
+    //     // this.isLoaded = true;
+    //     console.warn("test data", state, state.data, this.dataSource );
+    // });
   }
 
 

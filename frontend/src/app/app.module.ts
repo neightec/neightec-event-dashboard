@@ -55,6 +55,8 @@ import * as Icons from '@carbon/icons';
 import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
 import { NeightTechWeddingDashboardComponent } from './component/neight-tech-wedding-dashboard/neight-tech-wedding-dashboard.component';
 import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wedding-guest-list/neight-tech-wedding-guest-list.component';
+import { DashboardEffects } from './features/dashboard/store/dashboard.effects';
+import { dashboardReducer } from './features/dashboard/store/dashboard.reducer';
 
 @NgModule({
     imports: [
@@ -64,14 +66,12 @@ import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wed
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        // StoreModule.forRoot({
-        //   neightWeddingGuestList: neightWeddingGuestListReducer,
-        //   neightWeddingGuestFamilyList: neightWeddingGuestFamilyListReducer,
-        // }),
-        // EffectsModule.forRoot([
-        //   NeightWeddingGuestListEffects,
-        //   NeightWeddingGuestFamilyListEffects
-        // ]),
+        StoreModule.forRoot({
+          dashboard: dashboardReducer
+        }),
+        EffectsModule.forRoot([
+          DashboardEffects,
+        ]),
         IconModule,
         UIShellModule,
         ThemeModule,
