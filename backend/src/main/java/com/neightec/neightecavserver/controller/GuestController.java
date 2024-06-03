@@ -43,7 +43,7 @@ public class GuestController {
      * REST get to fetch list of guests from specific user
      * @return list of guestWedding
      */
-    @GetMapping(value = "/get-dashboard-list", produces = MediaType.)
+    @GetMapping(value = "/get-dashboard-list", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<List<GuestDTO>> getGuestDashboardList(@RequestParam(name = "uuid") UUID uuid) {
     public ResponseEntity<List<GuestDTO>> getGuestDashboardList() {
         log.info("/get-dashboard-list called");
