@@ -4,11 +4,16 @@
   [isNavigation]="isNavigation"
   [cacheActive]="cacheActive">
   
-  <ibm-tab heading="Guest List">
-    <neight-tech-wedding-guest-list>
-    </neight-tech-wedding-guest-list>
-  </ibm-tab>
   <ibm-tab heading="Overview">
-    Overview
+    <div class="guest-list-buttons">
+      <neight-tech-dashboard-overview>
+      </neight-tech-dashboard-overview>
+    </div>
+  </ibm-tab>
+  <ibm-tab heading="Guest List">
+    <div class="guest-list-table">
+      <neight-tech-wedding-guest-list>
+      </neight-tech-wedding-guest-list>
+    </div>
   </ibm-tab>
 </ibm-tabs>
