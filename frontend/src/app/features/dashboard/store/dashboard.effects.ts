@@ -19,28 +19,29 @@ export class DashboardEffects {
   //     ofType(initDashboard),
   //     mergeMap(action => {
   //       return this.guestService.fetchWeddingListEffect().pipe(
-  //         map(response => loadDataDashboardStateSuccess({ data: response })),
+  //         map(response => loadDataDashboardStateSuccess(
+  //           { data: response })),
   //         catchError(() => of(loadDataDashboardStateError()))
   //       );
   //     })
   //   );
   // });
 
-  // loadDataDashboard$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(loadDataDashboardState),
-  //     mergeMap(() =>
-  //       combineLatest([
-  //         this.guestService.fetchWeddingListEffect(),
-  //       ]).pipe(
-  //         map(([guests]) => {
-  //           return loadDataDashboardStateSuccess({ guests });
-  //         }),
-  //         catchError(() => of(loadDataDashboardStateError()))
-  //       )
-  //     )
-  //   );
-  // });
+  loadDataDashboard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadDataDashboardState),
+      mergeMap(() =>
+        combineLatest([
+          this.guestService.fetchWeddingDashboardList(),
+        ]).pipe(
+          map(([data]) => {
+            return loadDataDashboardStateSuccess({ data });
+          }),
+          catchError(() => of(loadDataDashboardStateError()))
+        )
+      )
+    );
+  });
 
   // loadDataDashboard$ = createEffect(() => {
   //   return this.actions$.pipe(

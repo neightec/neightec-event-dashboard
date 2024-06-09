@@ -21,11 +21,11 @@ export class GuestWeddingListService {
       this.apiEndpoint = `${neightEnvironment.api_url}`;
 }
 
-  public fetchWeddingListEffect(): Observable<GuestDTO[]> {
-    return this.http.get<GuestDTO[]>(`${this.apiEndpoint}guest/get-dashboard-list`);
-  }
+  // public fetchWeddingListEffect(): Observable<GuestDTO[]> {
+  //   return this.http.get<GuestDTO[]>(`${this.apiEndpoint}guest/get-dashboard-list`);
+  // }
 
-  public fetchWeddingList3(): Observable<GuestDTO[]> {
+  public fetchWeddingDashboardList(): Observable<GuestDTO[]> {
     try {
       const url = `${this.apiEndpoint}guest/get-dashboard-list`;
       const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -40,15 +40,15 @@ export class GuestWeddingListService {
   //   return lastValueFrom(this.http.get<Array<GuestDTO>>(`${this.apiEndpoint}guest/get-dashboard-list`));
   // }
 
-  async fetchWeddingList2(): Promise<any> {
-    try {
-      const url = `${this.apiEndpoint}guest/get-dashboard-list`;
-      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-      return lastValueFrom(this.http.get<any>(url, {headers: httpHeaders}));
-    } catch (e) {
-      throw e;
-    }
-  }
+  // async fetchWeddingList2(): Promise<any> {
+  //   try {
+  //     const url = `${this.apiEndpoint}guest/get-dashboard-list`;
+  //     const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  //     return lastValueFrom(this.http.get<any>(url, {headers: httpHeaders}));
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
   public fetchWeddingList(): any {
     // let url: string = this.neightApi.getBackendUrl() + this.controller_path;
