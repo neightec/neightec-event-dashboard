@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
 import { GuestDTO } from 'src/app/dto/GuestDTO';
-import { loadDataDashboardStateSuccess } from 'src/app/features/modules/store/dashboard.actions';
+import { loadDataDashboardStateSuccess } from 'src/app/features/modules/dashboard/store/dashboard.actions';
 import { DashboardState } from 'src/app/features/modules/store/dashboard.state';
 import { mockGuests } from 'src/app/mock-data/mock-data.helper';
 import { Guest } from 'src/app/models/guest';

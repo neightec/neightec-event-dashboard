@@ -55,8 +55,8 @@ import * as Icons from '@carbon/icons';
 import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
 import { NeightTechWeddingDashboardComponent } from './component/neight-tech-wedding-dashboard/neight-tech-wedding-dashboard.component';
 import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wedding-guest-list/neight-tech-wedding-guest-list.component';
-import { DashboardEffects } from './features/modules/store/dashboard.effects';
-import { dashboardReducer } from './features/modules/store/dashboard.reducer';
+import { DashboardEffects } from './features/modules/dashboard/store/dashboard.effects';
+import { dashboardReducer } from './features/modules/dashboard/store/dashboard.reducer';
 
 @NgModule({
     imports: [
