@@ -32,7 +32,7 @@
     "carbon-components-angular": "^5.24.8",
     "core-js": "^2.5.4",
     "node-sass": "^9.0.0",
-    "rxjs": "~6.6.7",
+    "rxjs": "7.5.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.13.3"
   },

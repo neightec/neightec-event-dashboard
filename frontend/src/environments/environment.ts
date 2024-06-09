@@ -6,7 +6,7 @@ import { NeightConfiguration } from "src/neight.config";
 
 export const neightEnvironment: NeightConfiguration = new NeightConfiguration();
 neightEnvironment.production = false;
-neightEnvironment.api_url = 'http://localhost:8080/neight-tech-api/';
+neightEnvironment.api_url = 'http://localhost:4201/ntav-api/';
 
 /*
  * For easier debugging in development mode, you can import the following file

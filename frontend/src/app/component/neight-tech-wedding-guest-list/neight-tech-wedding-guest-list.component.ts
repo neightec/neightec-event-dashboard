@@ -1,6 +1,11 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
+import { GuestDTO } from 'src/app/dto/GuestDTO';
+import { initDashboard, loadDataDashboardState, loadDataDashboardStateSuccess } from 'src/app/features/dashboard/store/dashboard.actions';
+import { selectDashboard } from 'src/app/features/dashboard/store/dashboard.selectors';
+import { DashboardState } from 'src/app/features/dashboard/store/dashboard.state';
 import { mockGuests } from 'src/app/mock-data/mock-data.helper';
 import { Guest } from 'src/app/models/guest';
 import { FetchGuestService } from 'src/app/services/fetch-guest.service';
@@ -16,6 +21,8 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   private readonly defaultPageLength = 15;
   private readonly defaultPage = 1;
   readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
+
+  tableData$;
 
   // TODO translations
   translations = {
@@ -33,8 +40,11 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   guestWeddingModel: TableModel = new TableModel();
   guests: TableModel = new TableModel();
   private guestsSubscription: Subscription | null = null;
+
+  dataSource: any;
   
   constructor(
+    private store: Store,
     protected guestWeddingListService: GuestWeddingListService
   ) {}
 
@@ -43,6 +53,20 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     this.guests.header = this.createTableHeader();
     this.guestWeddingModel.currentPage = this.defaultPage;
     this.guestWeddingModel.pageLength = this.defaultPageLength;
+    this.guestWeddingListService.fetchWeddingDashboardList().subscribe(response => {
+      this.dataSource = response;
+      this.store.dispatch(loadDataDashboardStateSuccess({ data: response }));
+    });
+
+    // TODO
+    this.store.select(loadDataDashboardStateSuccess).subscribe((state: DashboardState) => {
+      // this.tableViewState = this.stateWithConditions(
+        //     this.tableView || defaultStates.tableView,
+        //     this.condition
+        // );
+        // this.isLoaded = true;
+        // console.warn("test store select", state, state.data, this.dataSource );
+    });
   }
 
 
@@ -51,7 +75,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
       this.guests.data = this.loadData();
       if (this.guests.data) {
         this.guestWeddingModel.data = this.guests.data;
-        this.guestWeddingModel.totalDataLength = mockGuests.length; // TODO change this
+        this.guestWeddingModel.totalDataLength = this.guests.data.length;
         this.selectPage(this.guestWeddingModel.currentPage);
       }
     }
@@ -65,23 +89,19 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
 
   private createTableHeader(): TableHeaderItem[] {
     return [
-      new TableHeaderItem({data: 'id'}),
-      new TableHeaderItem({data: 'name'}),
-      new TableHeaderItem({data: 'contact'}),
-      new TableHeaderItem({data: 'status'}),
-      new TableHeaderItem({data: 'address'}),
+      new TableHeaderItem({data: 'Name Guest'}),
+      new TableHeaderItem({data: 'Status'}),
+      new TableHeaderItem({data: 'Date'}),
     ];
   }
 
   private loadData(): TableItem[][] {
-    let _guests: Guest[] = this.guestWeddingListService.fetchWeddingList();
-    if (_guests) {
-      return _guests.map((guest) => [
-        new TableItem({data: guest.id}),
+    let _guestServer = this.dataSource;
+    if (_guestServer) {
+      return _guestServer.map((guest) => [
         new TableItem({data: guest.name}),
-        new TableItem({data: guest.contact}),
-        new TableItem({data: guest.status}),
-        new TableItem({data: guest.address}),
+        new TableItem({data: guest.guestAttendanceEnum}),
+        new TableItem({data: guest.date}),
       ])
     }
     return null;
