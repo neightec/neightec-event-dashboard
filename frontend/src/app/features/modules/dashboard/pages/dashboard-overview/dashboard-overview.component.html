@@ -1,0 +1,21 @@
+<div class="dashboard-overview-view">
+  View
+</div>
+<div class="dashboard-overview-controls">
+  <div
+    id="fileContainer"
+    [ngClass]="{'cds--file__drop-container--drag-over': dragOver}"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    >
+    Upload file via CSV File
+  </div>
+  <div>
+    <button
+      ibmButton="primary"
+      (click)="enterGuestManuallyPopup()"
+    >
+      Enter Guest Manually
+    </button>
+  </div>
+</div>

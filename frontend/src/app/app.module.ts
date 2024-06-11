@@ -55,8 +55,10 @@ import * as Icons from '@carbon/icons';
 import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
 import { NeightTechWeddingDashboardComponent } from './component/neight-tech-wedding-dashboard/neight-tech-wedding-dashboard.component';
 import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wedding-guest-list/neight-tech-wedding-guest-list.component';
-import { DashboardEffects } from './features/dashboard/store/dashboard.effects';
-import { dashboardReducer } from './features/dashboard/store/dashboard.reducer';
+import { DashboardEffects } from './features/modules/dashboard/store/dashboard.effects';
+import { dashboardReducer } from './features/modules/dashboard/store/dashboard.reducer';
+import { UploadButtonFilesComponent } from './features/modules/dashboard/components/upload-button-files/upload-button-files.component';
+import { DashboardOverviewComponent } from './features/modules/dashboard/pages/dashboard-overview/dashboard-overview.component';
 
 @NgModule({
     imports: [
@@ -79,7 +81,8 @@ import { dashboardReducer } from './features/dashboard/store/dashboard.reducer';
         SkeletonModule,
         TabsModule,
         TableModule,
-        PaginationModule
+        PaginationModule,
+        ButtonModule
       ],
       declarations: [
         AppComponent,
@@ -87,6 +90,8 @@ import { dashboardReducer } from './features/dashboard/store/dashboard.reducer';
         NeightTechWeddingHomeComponent,
         NeightTechWeddingDashboardComponent,
         NeightTechWeddingGuestListComponent,
+        UploadButtonFilesComponent,
+        DashboardOverviewComponent,
     ],
     providers: [
       NeightApiService,

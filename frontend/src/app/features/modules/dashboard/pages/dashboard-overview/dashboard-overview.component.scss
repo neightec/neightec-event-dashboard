@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+
+  .dashboard-overview-controls {
+    padding: 0.5rem;
+
+    div {
+      &:first-child {
+        padding: 1rem;
+        min-height: 8rem;
+        border: 1px dashed #8d8d8d;
+      }
+
+      &:not(:first-child) {
+        padding-top: 0.5rem;
+      }
+    }
+  }
+}
