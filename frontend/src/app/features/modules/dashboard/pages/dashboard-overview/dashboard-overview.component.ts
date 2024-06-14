@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ModalService } from 'carbon-components-angular';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
+import { RegisterGuestDialogComponent } from '../../components/register-guest-dialog/register-guest-dialog.component';
 
 @Component({
   selector: 'neight-tech-dashboard-overview',
@@ -13,7 +15,8 @@ export class DashboardOverviewComponent implements OnInit {
 
   constructor(
     private store: Store,
-    protected guestWeddingListService: GuestWeddingListService
+    protected guestWeddingListService: GuestWeddingListService,
+    protected modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +38,15 @@ export class DashboardOverviewComponent implements OnInit {
     this.dragOver = false;
   }
 
-  enterGuestManuallyPopup(): void {
+  registerGuestManuallyPopup(): void {
     console.log("enterGuestManuallyPopup");
+    this.modalService.create({
+      component: RegisterGuestDialogComponent,
+      inputs: {
+        modalText: "Hello universe.",
+        newInput: true
+      }
+    });
   }
 
 }

@@ -59,6 +59,7 @@ import { DashboardEffects } from './features/modules/dashboard/store/dashboard.e
 import { dashboardReducer } from './features/modules/dashboard/store/dashboard.reducer';
 import { UploadButtonFilesComponent } from './features/modules/dashboard/components/upload-button-files/upload-button-files.component';
 import { DashboardOverviewComponent } from './features/modules/dashboard/pages/dashboard-overview/dashboard-overview.component';
+import { RegisterGuestDialogComponent } from './features/modules/dashboard/components/register-guest-dialog/register-guest-dialog.component';
 
 @NgModule({
     imports: [
@@ -82,7 +83,10 @@ import { DashboardOverviewComponent } from './features/modules/dashboard/pages/d
         TabsModule,
         TableModule,
         PaginationModule,
-        ButtonModule
+        ButtonModule,
+        ModalModule,
+        PlaceholderModule,
+        InputModule
       ],
       declarations: [
         AppComponent,
@@ -92,6 +96,7 @@ import { DashboardOverviewComponent } from './features/modules/dashboard/pages/d
         NeightTechWeddingGuestListComponent,
         UploadButtonFilesComponent,
         DashboardOverviewComponent,
+        RegisterGuestDialogComponent,
     ],
     providers: [
       NeightApiService,
