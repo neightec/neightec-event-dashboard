@@ -39,7 +39,6 @@ export class DashboardOverviewComponent implements OnInit {
   }
 
   registerGuestManuallyPopup(): void {
-    console.log("enterGuestManuallyPopup");
     this.modalService.create({
       component: RegisterGuestDialogComponent,
       inputs: {

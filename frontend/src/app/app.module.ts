@@ -60,6 +60,7 @@ import { dashboardReducer } from './features/modules/dashboard/store/dashboard.r
 import { UploadButtonFilesComponent } from './features/modules/dashboard/components/upload-button-files/upload-button-files.component';
 import { DashboardOverviewComponent } from './features/modules/dashboard/pages/dashboard-overview/dashboard-overview.component';
 import { RegisterGuestDialogComponent } from './features/modules/dashboard/components/register-guest-dialog/register-guest-dialog.component';
+import { DashboardFeatureKey } from './features/modules/dashboard/store/dashboard.state';
 
 @NgModule({
     imports: [
@@ -69,9 +70,7 @@ import { RegisterGuestDialogComponent } from './features/modules/dashboard/compo
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({
-          dashboard: dashboardReducer
-        }),
+        StoreModule.forFeature(DashboardFeatureKey, dashboardReducer),
         EffectsModule.forRoot([
           DashboardEffects,
         ]),

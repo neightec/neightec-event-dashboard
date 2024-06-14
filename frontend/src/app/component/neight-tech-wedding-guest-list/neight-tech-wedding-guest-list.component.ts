@@ -2,7 +2,7 @@ import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
-import { loadDataDashboardStateSuccess } from 'src/app/features/modules/dashboard/store/dashboard.actions';
+import { loadDataDashboardState, loadDataDashboardStateSuccess } from 'src/app/features/modules/dashboard/store/dashboard.actions';
 import { DashboardState } from 'src/app/features/modules/dashboard/store/dashboard.state';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 
@@ -53,14 +53,15 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
       this.store.dispatch(loadDataDashboardStateSuccess({ data: response }));
     });
 
-    // TODO
-    this.store.select(loadDataDashboardStateSuccess).subscribe((state: DashboardState) => {
+    // TODO still not working
+    this.store.dispatch(loadDataDashboardState());
+    this.store.select(loadDataDashboardStateSuccess).subscribe((state) => {
       // this.tableViewState = this.stateWithConditions(
         //     this.tableView || defaultStates.tableView,
         //     this.condition
         // );
         // this.isLoaded = true;
-        // console.warn("test store select", state, state.data, this.dataSource );
+        console.warn("test store select", state );
     });
   }
 
