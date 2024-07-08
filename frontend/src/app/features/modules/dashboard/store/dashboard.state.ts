@@ -1,8 +1,7 @@
-import { GuestDTO } from "src/app/dto/GuestDTO";
-import { Guest } from "src/app/models/guest";
+// import { GuestDTO } from "src/app/dto/GuestDTO";
 
-export const DashboardFeatureKey = 'dashboard';
+// export const DashboardFeatureKey = 'dashboard';
 
-export interface DashboardState {
-  data: GuestDTO[] | null;
-}
+// export interface DashboardState {
+//   data: GuestDTO[] | null;
+// }

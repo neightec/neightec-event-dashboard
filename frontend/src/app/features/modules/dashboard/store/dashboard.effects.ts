@@ -8,16 +8,9 @@ import { GuestDTO } from "src/app/dto/GuestDTO";
 @Injectable()
 export class DashboardEffects { 
   
-  init$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(initDashboard),
-      mergeMap(() => [loadDataDashboardState()])
-    );
-  });
-
   loadDataDashboard$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loadDataDashboardStateSuccess),
+      ofType(loadDataDashboardState),
       mergeMap(action => {
         return this.guestService.fetchWeddingDashboardList().pipe(
           map(response => loadDataDashboardStateSuccess({ data: response })),
