@@ -1,6 +1,5 @@
 import { createAction, props } from "@ngrx/store";
 import { GuestDTO } from "src/app/dto/GuestDTO";
-import { Guest } from "src/app/models/guest";
 
 enum DashboardActions { 
   InitDashboard = '[Dashboard] Init',

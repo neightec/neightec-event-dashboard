@@ -39,6 +39,9 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
   // this.store.select -- detect any guest objects entered in modal
 
   registerGuests() {
+    if (this.enteredGuests) {
+      
+    }
     this.closeModal();
   }
 
@@ -52,5 +55,14 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
 
   showEnteredGuest(text: string) {
     return text
+  }
+
+  deleteEnteredGuest(index: any) {
+    if (this.enteredGuests) {
+      const idx = this.enteredGuests.indexOf(index);
+      if (idx != -1) {
+        this.enteredGuests.splice(idx, 1);
+      }
+    }
   }
 }
