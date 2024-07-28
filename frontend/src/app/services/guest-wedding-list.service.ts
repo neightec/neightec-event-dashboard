@@ -25,12 +25,22 @@ export class GuestWeddingListService {
     try {
       const url = `${this.apiEndpoint}guest/get-dashboard-list`;
       const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-      return this.http.get<any>(url, {headers: httpHeaders});
+      return this.http.get<GuestDTO[]>(url, {headers: httpHeaders});
     } catch (e) {
       throw e;
     }
   }
 
+  public enterGuestToWeddingListManual(guests: string[]): Promise<GuestDTO[]> {
+    try {
+      const url = `${this.apiEndpoint}guest/add-list-manual`;
+      const body = JSON.stringify(guests);
+      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+      return lastValueFrom(this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders}));
+    } catch (e) {
+      throw e;
+    }
+  }
 
   public fetchWeddingList(): any {
     // let url: string = this.neightApi.getBackendUrl() + this.controller_path;
