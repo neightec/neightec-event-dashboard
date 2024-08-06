@@ -89,7 +89,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     if (_guestServer) {
       return _guestServer.map((guest) => [
         new TableItem({data: guest.name}),
-        new TableItem({data: guest.guestAttendanceEnum}),
+        new TableItem({data: guest.attendanceStatus}),
         new TableItem({data: guest.date}),
       ])
     }
