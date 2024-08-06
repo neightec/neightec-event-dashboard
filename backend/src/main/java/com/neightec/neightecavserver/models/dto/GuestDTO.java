@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
@@ -14,6 +15,6 @@ import java.time.LocalDate;
 @Setter
 public class GuestDTO {
     private String name;
-    private GuestAttendanceEnum guestAttendanceEnum;
-    private LocalDate date;
+    private String attendanceStatus;
+    private Instant date;
 }

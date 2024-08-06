@@ -36,3 +36,17 @@ CREATE TABLE neight.file_types
     is_valid	    boolean DEFAULT false,
     CONSTRAINT pk_file_types PRIMARY KEY ( id )
 );
+
+--liquibase formatted sql
+--changeset nsu:3
+--comment: add new table for guest
+DROP TABLE IF EXISTS neight.guest;
+
+CREATE TABLE neight.guest
+(
+    id                  uuid NOT NULL,
+    full_name	        VARCHAR(100),
+    attendance_status	VARCHAR(100),
+    valid_start     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT pk_guest PRIMARY KEY ( id )
+);
