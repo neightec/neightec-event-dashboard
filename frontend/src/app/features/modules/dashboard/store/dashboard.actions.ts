@@ -16,3 +16,8 @@ export const loadDataDashboardStateSuccess = createAction(
   props<{data: GuestDTO[]}>()
 );
 export const loadDataDashboardStateError = createAction(DashboardActions.LoadDataDashboardStateError);
+
+export const updateDataDashboard = createAction(
+  '[Modelling Table] External Modelling Action',
+  props<{guests: string[]}>()
+);

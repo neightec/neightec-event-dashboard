@@ -37,17 +37,18 @@ public class GuestService {
     private final GuestRepository guestRepository;
     private final GuestMapper guestMapper;
 
+    // TODO update in FE store
     public List<GuestDTO> addGuests(List<String> guests) {
         if (!guests.isEmpty()) {
-            List<GuestDTO> guestDTOS = new ArrayList<>();
+            List<GuestDTO> guestDTOS;
             guests.forEach(name -> {
                 Guest guest = new Guest();
                 guest.setFullName(name);
                 guest.setValidStart(Instant.now());
                 guest.setAttendanceStatus(GuestAttendanceEnum.ATTENDING.getName());
                 guestRepository.save(guest);
-                guestDTOS.add(guestMapper.toDTO(guest));
             });
+            guestDTOS = getAllGuests();
             return guestDTOS;
         }
         return Collections.emptyList();

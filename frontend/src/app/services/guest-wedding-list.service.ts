@@ -31,12 +31,12 @@ export class GuestWeddingListService {
     }
   }
 
-  public enterGuestToWeddingListManual(guests: string[]): Promise<GuestDTO[]> {
+  public enterGuestToWeddingListManual(guests: string[]): Observable<GuestDTO[]> {
     try {
       const url = `${this.apiEndpoint}guest/add-list-manual`;
       const body = JSON.stringify(guests);
       const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-      return lastValueFrom(this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders}));
+      return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
     } catch (e) {
       throw e;
     }

@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormControlName, FormGroup, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { BaseModal, ModalService } from 'carbon-components-angular';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
+import * as dashboardActions from '../../store/dashboard.actions';
 
 @Component({
   selector: 'neight-tech-register-guest-dialog',
@@ -19,6 +21,7 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
   constructor(
     @Inject('newInput') public newInput: boolean,
     protected modalService: ModalService,
+    private store: Store,
     private service: GuestWeddingListService //TODO in actions + effects
   ) {
     super();
@@ -42,7 +45,12 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
 
   registerGuests() {
     if (this.enteredGuests) {
-      this.service.enterGuestToWeddingListManual(this.enteredGuests);
+      // TODO update table data immediately and add new guest
+      this.store.dispatch(
+        dashboardActions.updateDataDashboard({
+          guests: this.enteredGuests
+        })
+      );
     }
     this.closeModal();
   }
