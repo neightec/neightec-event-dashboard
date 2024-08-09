@@ -42,12 +42,4 @@ export class GuestWeddingListService {
     }
   }
 
-  public fetchWeddingList(): any {
-    // let url: string = this.neightApi.getBackendUrl() + this.controller_path;
-    // const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    // const response: any = this.http.get(url, {headers: httpHeaders});
-    const response: any = mockGuests;
-
-    return response;
-  }
 }
