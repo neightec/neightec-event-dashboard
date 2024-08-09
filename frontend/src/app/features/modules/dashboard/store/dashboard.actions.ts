@@ -1,6 +1,5 @@
 import { createAction, props } from "@ngrx/store";
 import { GuestDTO } from "src/app/dto/GuestDTO";
-import { Guest } from "src/app/models/guest";
 
 enum DashboardActions { 
   InitDashboard = '[Dashboard] Init',
@@ -17,3 +16,8 @@ export const loadDataDashboardStateSuccess = createAction(
   props<{data: GuestDTO[]}>()
 );
 export const loadDataDashboardStateError = createAction(DashboardActions.LoadDataDashboardStateError);
+
+export const updateDataDashboard = createAction(
+  '[Modelling Table] External Modelling Action',
+  props<{guests: string[]}>()
+);

@@ -1,5 +1,5 @@
-import { Guest } from "../models/guest";
-import { User } from "../models/user";
+import { Guest } from "../models/guest.model";
+import { User } from "../models/user.model";
 
 export const mockGuests: Guest[] = [];
 const numGuests = 30; // Number of guests to generate

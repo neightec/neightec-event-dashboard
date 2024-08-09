@@ -2,9 +2,9 @@ import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
-import { loadDataDashboardStateSuccess } from 'src/app/features/modules/dashboard/store/dashboard.actions';
-import { DashboardState } from 'src/app/features/modules/dashboard/store/dashboard.state';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
+import * as dashboardActions from '../../features/modules/dashboard/store/dashboard.actions';
+import * as dashboardSelector from '../../features/modules/dashboard/store/dashboard.selectors';
 
 @Component({
   selector: 'neight-tech-wedding-guest-list',
@@ -37,6 +37,8 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   private guestsSubscription: Subscription | null = null;
 
   dataSource: any;
+
+  loadData$ = this.store.select(dashboardSelector.selectDashboard);
   
   constructor(
     private store: Store,
@@ -48,19 +50,11 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     this.guests.header = this.createTableHeader();
     this.guestWeddingModel.currentPage = this.defaultPage;
     this.guestWeddingModel.pageLength = this.defaultPageLength;
-    this.guestWeddingListService.fetchWeddingDashboardList().subscribe(response => {
-      this.dataSource = response;
-      this.store.dispatch(loadDataDashboardStateSuccess({ data: response }));
-    });
-
-    // TODO
-    this.store.select(loadDataDashboardStateSuccess).subscribe((state: DashboardState) => {
-      // this.tableViewState = this.stateWithConditions(
-        //     this.tableView || defaultStates.tableView,
-        //     this.condition
-        // );
-        // this.isLoaded = true;
-        // console.warn("test store select", state, state.data, this.dataSource );
+    this.store.dispatch(dashboardActions.loadDataDashboardState());
+    this.loadData$.subscribe(res => {
+      if (res) {
+        this.dataSource = res;
+      }
     });
   }
 
@@ -95,7 +89,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     if (_guestServer) {
       return _guestServer.map((guest) => [
         new TableItem({data: guest.name}),
-        new TableItem({data: guest.guestAttendanceEnum}),
+        new TableItem({data: guest.attendanceStatus}),
         new TableItem({data: guest.date}),
       ])
     }

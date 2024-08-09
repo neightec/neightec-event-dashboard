@@ -56,9 +56,10 @@ import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-
 import { NeightTechWeddingDashboardComponent } from './component/neight-tech-wedding-dashboard/neight-tech-wedding-dashboard.component';
 import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wedding-guest-list/neight-tech-wedding-guest-list.component';
 import { DashboardEffects } from './features/modules/dashboard/store/dashboard.effects';
-import { dashboardReducer } from './features/modules/dashboard/store/dashboard.reducer';
+import * as dashboardReducer from './features/modules/dashboard/store/dashboard.reducer';
 import { UploadButtonFilesComponent } from './features/modules/dashboard/components/upload-button-files/upload-button-files.component';
 import { DashboardOverviewComponent } from './features/modules/dashboard/pages/dashboard-overview/dashboard-overview.component';
+import { RegisterGuestDialogComponent } from './features/modules/dashboard/components/register-guest-dialog/register-guest-dialog.component';
 
 @NgModule({
     imports: [
@@ -68,10 +69,10 @@ import { DashboardOverviewComponent } from './features/modules/dashboard/pages/d
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        StoreModule.forRoot({
-          dashboard: dashboardReducer
-        }),
-        EffectsModule.forRoot([
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
+        StoreModule.forFeature(dashboardReducer.dashboardReducerKey, dashboardReducer.dashboardReducer),
+        EffectsModule.forFeature([
           DashboardEffects,
         ]),
         IconModule,
@@ -82,7 +83,10 @@ import { DashboardOverviewComponent } from './features/modules/dashboard/pages/d
         TabsModule,
         TableModule,
         PaginationModule,
-        ButtonModule
+        ButtonModule,
+        ModalModule,
+        PlaceholderModule,
+        InputModule
       ],
       declarations: [
         AppComponent,
@@ -92,6 +96,7 @@ import { DashboardOverviewComponent } from './features/modules/dashboard/pages/d
         NeightTechWeddingGuestListComponent,
         UploadButtonFilesComponent,
         DashboardOverviewComponent,
+        RegisterGuestDialogComponent,
     ],
     providers: [
       NeightApiService,

@@ -3,7 +3,6 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable, lastValueFrom, map } from 'rxjs';
 import { NeightApiService } from 'src/neight-api.service';
 import { mockGuests } from '../mock-data/mock-data.helper';
-import { Guest } from '../models/guest';
 import { neightEnvironment } from 'src/environments/environment';
 import { GuestDTO } from '../dto/GuestDTO';
 
@@ -21,41 +20,26 @@ export class GuestWeddingListService {
       this.apiEndpoint = `${neightEnvironment.api_url}`;
 }
 
-  // public fetchWeddingListEffect(): Observable<GuestDTO[]> {
-  //   return this.http.get<GuestDTO[]>(`${this.apiEndpoint}guest/get-dashboard-list`);
-  // }
 
   public fetchWeddingDashboardList(): Observable<GuestDTO[]> {
     try {
       const url = `${this.apiEndpoint}guest/get-dashboard-list`;
       const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-      return this.http.get<any>(url, {headers: httpHeaders});
+      return this.http.get<GuestDTO[]>(url, {headers: httpHeaders});
     } catch (e) {
       throw e;
     }
   }
 
-  // public async fetchWeddingListPromise(): Promise<GuestDTO[]> {
-  //   const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-  //   return lastValueFrom(this.http.get<Array<GuestDTO>>(`${this.apiEndpoint}guest/get-dashboard-list`));
-  // }
-
-  // async fetchWeddingList2(): Promise<any> {
-  //   try {
-  //     const url = `${this.apiEndpoint}guest/get-dashboard-list`;
-  //     const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-  //     return lastValueFrom(this.http.get<any>(url, {headers: httpHeaders}));
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
-
-  public fetchWeddingList(): any {
-    // let url: string = this.neightApi.getBackendUrl() + this.controller_path;
-    // const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    // const response: any = this.http.get(url, {headers: httpHeaders});
-    const response: any = mockGuests;
-
-    return response;
+  public enterGuestToWeddingListManual(guests: string[]): Observable<GuestDTO[]> {
+    try {
+      const url = `${this.apiEndpoint}guest/add-list-manual`;
+      const body = JSON.stringify(guests);
+      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
+    } catch (e) {
+      throw e;
+    }
   }
+
 }
