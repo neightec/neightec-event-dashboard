@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import * as dashboardSelector from '../../features/modules/dashboard/store/dashb
   templateUrl: './neight-tech-wedding-guest-list.component.html',
   styleUrls: ['./neight-tech-wedding-guest-list.component.scss']
 })
-export class NeightTechWeddingGuestListComponent implements OnInit, AfterContentChecked {
+export class NeightTechWeddingGuestListComponent implements OnInit {
   
   private readonly defaultPageLength = 15;
   private readonly defaultPage = 1;
@@ -54,20 +54,9 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     this.loadData$.subscribe(res => {
       if (res) {
         this.dataSource = res;
+        this.loadTableDatasource();
       }
     });
-  }
-
-
-  ngAfterContentChecked(): void {
-    if (this.guestsSubscription === null) {
-      this.guests.data = this.loadData();
-      if (this.guests.data) {
-        this.guestWeddingModel.data = this.guests.data;
-        this.guestWeddingModel.totalDataLength = this.guests.data.length;
-        this.selectPage(this.guestWeddingModel.currentPage);
-      }
-    }
   }
 
   ngOnDestroy(): void {
@@ -84,10 +73,20 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     ];
   }
 
+  private loadTableDatasource() {
+    if (this.dataSource.length !== 0) {
+      this.guests.data = this.loadData();
+      if (this.guests.data) {
+        this.guestWeddingModel.data = this.guests.data;
+        this.guestWeddingModel.totalDataLength = this.guests.data.length;
+        this.selectPage(this.guestWeddingModel.currentPage);
+      }
+    }
+  }
+
   private loadData(): TableItem[][] {
-    let _guestServer = this.dataSource;
-    if (_guestServer) {
-      return _guestServer.map((guest) => [
+    if (this.dataSource) {
+      return this.dataSource.map((guest) => [
         new TableItem({data: guest.name}),
         new TableItem({data: guest.attendanceStatus}),
         new TableItem({data: guest.date}),
@@ -97,10 +96,10 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   }
 
   selectPage(page: number): void {
+    this.guestWeddingModel.currentPage = page;
     const offset = this.guestWeddingModel.pageLength * (page - 1);
     const pageRawData = this.guests.data.slice(offset, offset + this.guestWeddingModel.pageLength);
     this.guestWeddingModel.data = pageRawData;
-    this.guestWeddingModel.currentPage = page;
   }
 
   // TODO seems not working
@@ -116,4 +115,13 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
 
     this.selectPage(this.guestWeddingModel.currentPage);
   }
+
+  deleteGuests() {
+
+  }
+
+
+	onRowClick(index: number) {
+		console.log("Row item selected:", index);
+	}
 }

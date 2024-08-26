@@ -1,10 +1,21 @@
+<div class="container-buttons">
+  <button
+    ibmButton="primary"
+    (click)="deleteGuests()" >
+    Register Guest Manually
+  </button>
+</div>
+
 <ibm-table-container>
-  <ibm-table
-    [model]="guestWeddingModel"
-    (sort)="sort($event)"
-    [striped]="false"
-    [showSelectionColumn]="false"
-  >
+  <ibm-table 
+    [model]="guestWeddingModel" 
+    [size]="'md'" 
+    [showSelectionColumn]="true"
+    [striped]="false" 
+    [skeleton]="false" 
+    [isDataGrid]="false" 
+    [sortAscendingLabel]="true"
+    [sortDescendingLabel]="true">
     <!-- <tbody>
       <tr>
         <td class="no-data" colspan="69"><div>No data.</div></td>
