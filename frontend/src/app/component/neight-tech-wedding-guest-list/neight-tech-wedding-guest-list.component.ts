@@ -16,6 +16,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   private readonly defaultPageLength = 15;
   private readonly defaultPage = 1;
   readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
+  private selectedRows: number[] = [];
 
   tableData$;
 
@@ -116,12 +117,39 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
     this.selectPage(this.guestWeddingModel.currentPage);
   }
 
+  cancel() {
+    console.log("nothing to cancel");
+  }
+
+  registerManually() {
+    console.log("nothing to register");
+  }
+  
   deleteGuests() {
+    console.log("nothing to delete");
+  }
+
+  downloadGuestList() {
 
   }
 
-
 	onRowClick(index: number) {
 		console.log("Row item selected:", index);
+	}
+
+	onSelectRow(index: any) {
+    const selectedRowType = index?.selectedRowIndex != undefined ? true : false;
+
+    if (selectedRowType) {
+      const idx = this.selectedRows.indexOf(index?.selectedRowIndex);
+      
+      if (idx == -1) {
+        this.selectedRows.push(index?.selectedRowIndex);
+      }
+    } else {
+      const idx = this.selectedRows.indexOf(index?.deselectedRowIndex);
+      this.selectedRows.splice(idx, 1);
+    }
+		console.log("onSelectRow selected:", index, selectedRowType, this.selectedRows);
 	}
 }
