@@ -2,20 +2,15 @@ package com.neightec.neightecavserver.controller;
 
 import com.neightec.neightecavserver.models.dto.GuestDTO;
 import com.neightec.neightecavserver.models.enums.GuestAttendanceEnum;
-import com.neightec.neightecavserver.services.FileTypesService;
 import com.neightec.neightecavserver.services.GuestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.annotations.Parameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -77,4 +72,25 @@ public class GuestController {
         return ResponseEntity.ok(guestService.addGuests(guests));
     }
 
+    /**
+     * REST get to find the guest by full name
+     * @param fullName name of the guest
+     * @return boolean response entity
+     */
+    @GetMapping(value = "/is-guest-full-name-unique", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> isGuestFullNameUnique(@RequestParam ("full_name") String fullName) {
+        log.info("/is-guest-full-name-unique called: {}", fullName);
+        return ResponseEntity.ok(guestService.isGuestFullNameUnique(fullName));
+    }
+
+    /**
+     * REST delete guests by fullnames
+     * @param fullNames name of the guest
+     * @return boolean response entity
+     */
+    @PostMapping(value = "/delete-guests-by-fullnames", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GuestDTO>> deleteGuestsByFullnames(@RequestBody List<String> fullNames) {
+        log.info("/delete-guests-by-fullnames called: {}", fullNames);
+        return ResponseEntity.ok(guestService.deleteGuestsByNames(fullNames));
+    }
 }

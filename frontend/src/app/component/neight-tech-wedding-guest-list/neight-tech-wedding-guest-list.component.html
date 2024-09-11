@@ -1,15 +1,49 @@
+<div class="container-buttons">
+  <button
+    ibmButton="primary"
+    (click)="registerManually()" >
+    Register Guest Manually
+  </button>
+</div>
+
 <ibm-table-container>
-  <ibm-table
+  <ibm-table-toolbar
     [model]="guestWeddingModel"
-    (sort)="sort($event)"
-    [striped]="false"
-    [showSelectionColumn]="false"
-  >
-    <!-- <tbody>
+    [batchText]="'Test'"
+    [size]="'md'"
+    (cancel)="cancel()"
+    #toolbar>
+    <ibm-table-toolbar-actions>
+        <button cdsButton="primary" 
+            [tabindex]="toolbar.selected ? 0 : -1" (click)="deleteGuests()">
+            Delete
+            <svg cdsIcon="trash-can" size="16" class="ibm--btn__icon"></svg>
+        </button>
+        <button cdsButton="primary" 
+            [tabindex]="toolbar.selected ? 0 : -1" (click)="downloadGuestList()">
+            Download
+            <svg cdsIcon="download" size="16" class="ibm--btn__icon"></svg>
+        </button>
+    </ibm-table-toolbar-actions>
+  </ibm-table-toolbar>
+  <ibm-table 
+    [model]="guestWeddingModel" 
+    [size]="'md'" 
+    [showSelectionColumn]="true"
+    [striped]="false" 
+    [skeleton]="false" 
+    [isDataGrid]="false" 
+    [sortAscendingLabel]="true"
+    [sortDescendingLabel]="true"
+    (rowClick)="onRowClick($event)"
+    (deselectRow)="onSelectRow($event)"
+    (selectRow)="onSelectRow($event)"
+    >
+    <tbody>
       <tr>
         <td class="no-data" colspan="69"><div>No data.</div></td>
       </tr>
-    </tbody> -->
+    </tbody>
   </ibm-table>
   <ibm-pagination
     [model]="guestWeddingModel"

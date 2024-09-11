@@ -1,28 +1,18 @@
 package com.neightec.neightecavserver.services;
 
-import com.neightec.neightecavserver.config.NeightecFilePathsConfig;
 import com.neightec.neightecavserver.models.dto.GuestDTO;
 import com.neightec.neightecavserver.models.enums.GuestAttendanceEnum;
-import com.neightec.neightecavserver.models.neightec_data.FileSignature;
 import com.neightec.neightecavserver.models.neightec_data.Guest;
-import com.neightec.neightecavserver.repositories.FileSignatureRepository;
 import com.neightec.neightecavserver.repositories.GuestRepository;
 import com.neightec.neightecavserver.services.mapper.GuestMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.poi.ss.usermodel.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ResourceUtils;
 
-import java.io.*;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Guest Service
@@ -58,4 +48,25 @@ public class GuestService {
         return guestRepository.findAll().stream().map(guestMapper::toDTO).toList();
     }
 
+    public List<GuestDTO> deleteGuestsByNames(List<String> guests) {
+        if (!guests.isEmpty()) {
+            guests.forEach(name -> {
+                Guest guest = findByFullName(name);
+                if (guest != null) {
+                    log.info("Guest to be deleted: {} ", guest.getFullName());
+                    guestRepository.delete(guest);
+                }
+            });
+            return getAllGuests();
+        }
+        return Collections.emptyList();
+    }
+
+    public Guest findByFullName(String fullName) {
+        return guestRepository.findByFullName(fullName);
+    }
+
+    public boolean isGuestFullNameUnique(String aktionskennzeichen) {
+        return !guestRepository.existsByGuestFullName(aktionskennzeichen);
+    }
 }

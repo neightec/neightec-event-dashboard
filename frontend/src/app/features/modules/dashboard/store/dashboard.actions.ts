@@ -6,6 +6,8 @@ enum DashboardActions {
   LoadDataDashboardState = '[Core] Load Data Dashboard',
   LoadDataDashboardStateSuccess = '[Core] Load Data Dashboard Success',
   LoadDataDashboardStateError = '[Core] Load Data Dashboard Error',
+  LoadDataGuestAfterDeleteStateSuccess = '[Core] Load Data Guest Dashboard After Delete success',
+  LoadDataGuestAfterDeleteStateFailure = '[Core] Load Data Guest Dashboard After Delete failure',
 }
 
 export const initDashboard = createAction(DashboardActions.InitDashboard, props<{ data: GuestDTO[] }>());
@@ -17,7 +19,18 @@ export const loadDataDashboardStateSuccess = createAction(
 );
 export const loadDataDashboardStateError = createAction(DashboardActions.LoadDataDashboardStateError);
 
+export const loadDataGuestAfterDeleteStateSuccess = createAction(
+  DashboardActions.LoadDataGuestAfterDeleteStateSuccess,
+  props<{data: GuestDTO[]}>()
+);
+export const loadDataGuestAfterDeleteStateError = createAction(DashboardActions.LoadDataGuestAfterDeleteStateFailure);
+
 export const updateDataDashboard = createAction(
+  '[Modelling Table] External Modelling Action',
+  props<{guests: string[]}>()
+);
+
+export const deleteGuestsFrom = createAction(
   '[Modelling Table] External Modelling Action',
   props<{guests: string[]}>()
 );

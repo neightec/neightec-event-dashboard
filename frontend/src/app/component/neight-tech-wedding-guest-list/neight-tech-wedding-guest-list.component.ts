@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
+import { clone, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 import * as dashboardActions from '../../features/modules/dashboard/store/dashboard.actions';
@@ -11,11 +11,12 @@ import * as dashboardSelector from '../../features/modules/dashboard/store/dashb
   templateUrl: './neight-tech-wedding-guest-list.component.html',
   styleUrls: ['./neight-tech-wedding-guest-list.component.scss']
 })
-export class NeightTechWeddingGuestListComponent implements OnInit, AfterContentChecked {
+export class NeightTechWeddingGuestListComponent implements OnInit {
   
   private readonly defaultPageLength = 15;
   private readonly defaultPage = 1;
   readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
+  private selectedRows: number[] = [];
 
   tableData$;
 
@@ -35,6 +36,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   guestWeddingModel: TableModel = new TableModel();
   guests: TableModel = new TableModel();
   private guestsSubscription: Subscription | null = null;
+  guestsToDeleted: string[] = [];
 
   dataSource: any;
 
@@ -54,20 +56,9 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
     this.loadData$.subscribe(res => {
       if (res) {
         this.dataSource = res;
+        this.loadTableDatasource();
       }
     });
-  }
-
-
-  ngAfterContentChecked(): void {
-    if (this.guestsSubscription === null) {
-      this.guests.data = this.loadData();
-      if (this.guests.data) {
-        this.guestWeddingModel.data = this.guests.data;
-        this.guestWeddingModel.totalDataLength = this.guests.data.length;
-        this.selectPage(this.guestWeddingModel.currentPage);
-      }
-    }
   }
 
   ngOnDestroy(): void {
@@ -78,16 +69,26 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
 
   private createTableHeader(): TableHeaderItem[] {
     return [
-      new TableHeaderItem({data: 'Name Guest'}),
+      new TableHeaderItem({data: 'Name'}), // must be unique like aktionskennzeichenValidator in ergoat
       new TableHeaderItem({data: 'Status'}),
       new TableHeaderItem({data: 'Date'}),
     ];
   }
 
+  private loadTableDatasource() {
+    if (this.dataSource.length !== 0) {
+      this.guests.data = this.loadData();
+      if (this.guests.data) {
+        this.guestWeddingModel.data = this.guests.data;
+        this.guestWeddingModel.totalDataLength = this.guests.data.length;
+        this.selectPage(this.guestWeddingModel.currentPage);
+      }
+    }
+  }
+
   private loadData(): TableItem[][] {
-    let _guestServer = this.dataSource;
-    if (_guestServer) {
-      return _guestServer.map((guest) => [
+    if (this.dataSource) {
+      return this.dataSource.map((guest) => [
         new TableItem({data: guest.name}),
         new TableItem({data: guest.attendanceStatus}),
         new TableItem({data: guest.date}),
@@ -97,10 +98,10 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
   }
 
   selectPage(page: number): void {
+    this.guestWeddingModel.currentPage = page;
     const offset = this.guestWeddingModel.pageLength * (page - 1);
     const pageRawData = this.guests.data.slice(offset, offset + this.guestWeddingModel.pageLength);
     this.guestWeddingModel.data = pageRawData;
-    this.guestWeddingModel.currentPage = page;
   }
 
   // TODO seems not working
@@ -116,4 +117,58 @@ export class NeightTechWeddingGuestListComponent implements OnInit, AfterContent
 
     this.selectPage(this.guestWeddingModel.currentPage);
   }
+
+  cancel() {
+    console.log("nothing to cancel");
+  }
+
+  registerManually() {
+    console.log("nothing to register");
+  }
+  
+  deleteGuests() {
+    if (this.selectedRows) {
+      const dataSourceCloned = clone(this.dataSource);
+      this.selectedRows.forEach(row => {
+        if (dataSourceCloned[row] && dataSourceCloned[row].name) {
+          this.guestsToDeleted.push(dataSourceCloned[row].name);
+        }
+      });
+    }
+    this.deleteGuestList();
+  }
+
+  deleteGuestList(): void {
+    if (this.guestsToDeleted) {
+      this.store.dispatch(
+        dashboardActions.deleteGuestsFrom({
+          guests: this.guestsToDeleted
+        })
+      );
+    }
+  }
+
+  downloadGuestList() {
+
+  }
+
+	onRowClick(index: number) {
+		console.log("Row item selected:", index);
+	}
+
+	onSelectRow(index: any) {
+    const selectedRowType = index?.selectedRowIndex != undefined ? true : false;
+
+    if (selectedRowType) {
+      const idx = this.selectedRows.indexOf(index?.selectedRowIndex);
+      
+      if (idx == -1) {
+        this.selectedRows.push(index?.selectedRowIndex);
+      }
+    } else {
+      const idx = this.selectedRows.indexOf(index?.deselectedRowIndex);
+      this.selectedRows.splice(idx, 1);
+    }
+		console.log("onSelectRow selected:", index, selectedRowType, this.selectedRows);
+	}
 }

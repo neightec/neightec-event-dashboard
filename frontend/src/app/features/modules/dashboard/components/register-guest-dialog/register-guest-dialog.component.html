@@ -5,7 +5,7 @@
     </ibm-modal-header>
     <section ibmModalContent>
       <form [formGroup]="registerUserFormGroup">
-        <div class="basic-information__row" ibmRow *ngIf="registerUserFormGroup.controls['registerUserFormControl'].valid">
+        <div class="basic-information__row" ibmRow>
           <ibm-label>
             Name
           <input
@@ -13,6 +13,9 @@
             formControlName="registerUserFormControl"
             (keydown.enter)="enterGuest()"/>
           </ibm-label>
+        </div>
+        <div *ngIf="registerUserFormGroup.controls['registerUserFormControl'].errors?.['guestFullNameIsNotUnique']">
+          {{ 'Duplicate name detected' }}
         </div>
       </form>
     </section>
