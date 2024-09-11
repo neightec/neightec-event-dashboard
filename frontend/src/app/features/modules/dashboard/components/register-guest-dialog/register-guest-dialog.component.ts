@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { BaseModal, ModalService } from 'carbon-components-angular';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 import * as dashboardActions from '../../store/dashboard.actions';
+import { GuestFullnameValidator } from 'src/app/validators/guest-fullname.validator';
 
 @Component({
   selector: 'neight-tech-register-guest-dialog',
@@ -22,6 +23,7 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
     @Inject('newInput') public newInput: boolean,
     protected modalService: ModalService,
     private store: Store,
+    private guestFullNameValidator: GuestFullnameValidator,
     private service: GuestWeddingListService //TODO in actions + effects
   ) {
     super();
@@ -31,10 +33,17 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
     if (!this.data && this.newInput) {
       this.registerUserFormGroup = new FormGroup(
         {
-          registerUserFormControl: new FormControl({
-            value: '',
-            disabled: false,
-          }),
+          registerUserFormControl: new FormControl(
+            {
+              value: null,
+              disabled: false,
+            },
+            {
+              asyncValidators: this.guestFullNameValidator.validate.bind(
+                this.guestFullNameValidator
+              ),
+            }
+        ),
         },
       );
       this.data = this.newInput; // prevent first from "Expression has changed after it was checked" Error
@@ -56,7 +65,7 @@ export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
   }
 
   enterGuest() {
-    if (this.registerUserFormGroup.get('registerUserFormControl').value) {
+    if (this.registerUserFormGroup.get('registerUserFormControl').value && !this.registerUserFormGroup.controls['registerUserFormControl'].errors) {
       const guest: string = this.registerUserFormGroup.get('registerUserFormControl').value;
       this.enteredGuests.push(guest);
       this.registerUserFormGroup.get('registerUserFormControl').setValue(null);

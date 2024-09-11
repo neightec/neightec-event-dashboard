@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, combineLatest, forkJoin, map, mergeMap, of, switchMap } from 'rxjs';
-import { initDashboard, loadDataDashboardState, loadDataDashboardStateError, loadDataDashboardStateSuccess, updateDataDashboard } from "./dashboard.actions";
+import { deleteGuestsFrom, initDashboard, loadDataDashboardState, loadDataDashboardStateError, loadDataDashboardStateSuccess, loadDataGuestAfterDeleteStateError, loadDataGuestAfterDeleteStateSuccess, updateDataDashboard } from "./dashboard.actions";
 import { GuestWeddingListService } from "src/app/services/guest-wedding-list.service";
 import { GuestDTO } from "src/app/dto/GuestDTO";
 
@@ -27,6 +27,18 @@ export class DashboardEffects {
         return this.guestService.enterGuestToWeddingListManual(action.guests).pipe(
           map(response => loadDataDashboardStateSuccess({ data: response })),
           catchError(() => of(loadDataDashboardStateError()))
+        )
+      })
+    );
+  });
+
+  deleteGuestDataDashboard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteGuestsFrom),
+      mergeMap(action => {
+        return this.guestService.deleteGuests(action.guests).pipe(
+          map(response => loadDataGuestAfterDeleteStateSuccess({ data: response })),
+          catchError(() => of(loadDataGuestAfterDeleteStateError()))
         )
       })
     );

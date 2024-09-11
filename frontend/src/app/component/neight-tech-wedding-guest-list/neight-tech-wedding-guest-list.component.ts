@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
+import { clone, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subscription } from 'rxjs';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 import * as dashboardActions from '../../features/modules/dashboard/store/dashboard.actions';
@@ -36,6 +36,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   guestWeddingModel: TableModel = new TableModel();
   guests: TableModel = new TableModel();
   private guestsSubscription: Subscription | null = null;
+  guestsToDeleted: string[] = [];
 
   dataSource: any;
 
@@ -68,7 +69,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
 
   private createTableHeader(): TableHeaderItem[] {
     return [
-      new TableHeaderItem({data: 'Name Guest'}),
+      new TableHeaderItem({data: 'Name'}), // must be unique like aktionskennzeichenValidator in ergoat
       new TableHeaderItem({data: 'Status'}),
       new TableHeaderItem({data: 'Date'}),
     ];
@@ -126,7 +127,25 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   }
   
   deleteGuests() {
-    console.log("nothing to delete");
+    if (this.selectedRows) {
+      const dataSourceCloned = clone(this.dataSource);
+      this.selectedRows.forEach(row => {
+        if (dataSourceCloned[row] && dataSourceCloned[row].name) {
+          this.guestsToDeleted.push(dataSourceCloned[row].name);
+        }
+      });
+    }
+    this.deleteGuestList();
+  }
+
+  deleteGuestList(): void {
+    if (this.guestsToDeleted) {
+      this.store.dispatch(
+        dashboardActions.deleteGuestsFrom({
+          guests: this.guestsToDeleted
+        })
+      );
+    }
   }
 
   downloadGuestList() {

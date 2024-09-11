@@ -1,5 +1,6 @@
 export interface GuestDTO {
+  id: number;
   name: string;
-  guestAttendanceEnum: any;
-  date: any;
+  guestAttendanceEnum: string;
+  date: Date;
 }

@@ -42,4 +42,25 @@ export class GuestWeddingListService {
     }
   }
 
+  deleteGuests(guestLists: string[]): Observable<GuestDTO[]> {
+    try {
+      const url = `${this.apiEndpoint}guest/delete-guests-by-fullnames`;
+      const body = JSON.stringify(guestLists);
+      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  validateUniqueGuestFullname(fullName: string): Observable<boolean> {
+    try {
+      const url = `${this.apiEndpoint}guest/is-guest-full-name-unique?full_name=${fullName}`
+      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.get<boolean>(url, {headers: httpHeaders});
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }
