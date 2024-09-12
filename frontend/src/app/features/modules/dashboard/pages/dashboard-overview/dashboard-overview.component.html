@@ -9,6 +9,7 @@
     (dragleave)="onDragLeave($event)"
     >
     Upload file via CSV File
+    <input #fileInput type="file" class="bx--file-input" multiple [accept]="true" tabindex="-1"/>
   </div>
   <div>
     <button
