@@ -28,6 +28,12 @@ dist/
 # JetBrains IDE
 .idea/
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
 # Unit test reports
 TEST*.xml
 
