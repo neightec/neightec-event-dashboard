@@ -17,6 +17,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   private readonly defaultPage = 1;
   readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
   private selectedRows: number[] = [];
+  private selectedGuests: string[] = [];
 
   tableData$;
 
@@ -127,25 +128,18 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   }
   
   deleteGuests() {
-    if (this.selectedRows) {
-      const dataSourceCloned = clone(this.dataSource);
-      this.selectedRows.forEach(row => {
-        if (dataSourceCloned[row] && dataSourceCloned[row].name) {
-          this.guestsToDeleted.push(dataSourceCloned[row].name);
-        }
-      });
+    if (this.selectedGuests) {
+      this.deleteGuestStore();
+      this.selectedGuests = [];
     }
-    this.deleteGuestList();
   }
 
-  deleteGuestList(): void {
-    if (this.guestsToDeleted) {
-      this.store.dispatch(
-        dashboardActions.deleteGuestsFrom({
-          guests: this.guestsToDeleted
-        })
-      );
-    }
+  deleteGuestStore(): void {
+    this.store.dispatch(
+      dashboardActions.deleteGuestsFrom({
+        guests: this.selectedGuests
+      })
+    );
   }
 
   downloadGuestList() {
@@ -157,17 +151,19 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
 	}
 
 	onSelectRow(index: any) {
+    const dataTable = index?.model._data;
     const selectedRowType = index?.selectedRowIndex != undefined ? true : false;
 
-    if (selectedRowType) {
-      const idx = this.selectedRows.indexOf(index?.selectedRowIndex);
+    if (selectedRowType && dataTable) {
+      const idx = this.selectedGuests.indexOf(dataTable[index?.selectedRowIndex][0].data);
+      debugger;
       
       if (idx == -1) {
-        this.selectedRows.push(index?.selectedRowIndex);
+        this.selectedGuests.push(dataTable[index?.selectedRowIndex][0].data);
       }
     } else {
-      const idx = this.selectedRows.indexOf(index?.deselectedRowIndex);
-      this.selectedRows.splice(idx, 1);
+      const idx = this.selectedGuests.indexOf(dataTable[index?.deselectedRowIndex][0].data);
+      this.selectedGuests.splice(idx, 1);
     }
 		console.log("onSelectRow selected:", index, selectedRowType, this.selectedRows);
 	}
