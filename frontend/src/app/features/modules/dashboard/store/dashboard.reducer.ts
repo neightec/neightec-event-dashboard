@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { loadDataDashboardStateError, loadDataDashboardStateSuccess } from "./dashboard.actions";
+import { loadDataDashboardStateError, loadDataDashboardStateSuccess, loadDataGuestAfterDeleteStateError, loadDataGuestAfterDeleteStateSuccess } from "./dashboard.actions";
 import { GuestDTO } from "src/app/dto/GuestDTO";
 
 export const dashboardReducerKey = 'dashboard-reducer-key';
@@ -25,7 +25,21 @@ export const dashboardReducer = createReducer(
     loadDataDashboardStateError,
     (state, action) => ({
       ...state as DashboardState,
-      data: state.data,
+      data: null,
+    })
+  ),
+  on(
+    loadDataGuestAfterDeleteStateSuccess,
+    (state, action) => ({
+      ...state as DashboardState,
+      data: action.data,
+    })
+  ),
+  on(
+    loadDataGuestAfterDeleteStateError,
+    (state, action) => ({
+      ...state as DashboardState,
+      data: null,
     })
   ),
 );

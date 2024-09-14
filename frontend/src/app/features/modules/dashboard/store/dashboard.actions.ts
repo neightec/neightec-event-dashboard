@@ -26,11 +26,11 @@ export const loadDataGuestAfterDeleteStateSuccess = createAction(
 export const loadDataGuestAfterDeleteStateError = createAction(DashboardActions.LoadDataGuestAfterDeleteStateFailure);
 
 export const updateDataDashboard = createAction(
-  '[Modelling Table] External Modelling Action',
+  '[Dashboard Actions] add guest to dashboard',
   props<{guests: string[]}>()
 );
 
 export const deleteGuestsFrom = createAction(
-  '[Modelling Table] External Modelling Action',
+  '[Dashboard Actions] delete guest to dashboard',
   props<{guests: string[]}>()
 );

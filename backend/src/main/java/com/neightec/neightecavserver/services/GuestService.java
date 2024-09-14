@@ -33,7 +33,7 @@ public class GuestService {
         if (!guests.isEmpty()) {
             List<GuestDTO> guestDTOS;
             guests.forEach(name -> {
-                if (findByFullName(name) != null) {
+                if (findByFullName(name) == null) {
                     Guest guest = new Guest();
                     guest.setFullName(name);
                     guest.setValidStart(Instant.now());
