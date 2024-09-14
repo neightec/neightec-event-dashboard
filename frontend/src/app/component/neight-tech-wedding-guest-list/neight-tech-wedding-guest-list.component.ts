@@ -156,7 +156,6 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
 
     if (selectedRowType && dataTable) {
       const idx = this.selectedGuests.indexOf(dataTable[index?.selectedRowIndex][0].data);
-      debugger;
       
       if (idx == -1) {
         this.selectedGuests.push(dataTable[index?.selectedRowIndex][0].data);
