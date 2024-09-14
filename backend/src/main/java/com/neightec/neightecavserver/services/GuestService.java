@@ -8,6 +8,7 @@ import com.neightec.neightecavserver.services.mapper.GuestMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Collections;
@@ -32,11 +33,13 @@ public class GuestService {
         if (!guests.isEmpty()) {
             List<GuestDTO> guestDTOS;
             guests.forEach(name -> {
-                Guest guest = new Guest();
-                guest.setFullName(name);
-                guest.setValidStart(Instant.now());
-                guest.setAttendanceStatus(GuestAttendanceEnum.ATTENDING.getName());
-                guestRepository.save(guest);
+                if (findByFullName(name) == null) {
+                    Guest guest = new Guest();
+                    guest.setFullName(name);
+                    guest.setValidStart(Instant.now());
+                    guest.setAttendanceStatus(GuestAttendanceEnum.ATTENDING.getName());
+                    guestRepository.save(guest);
+                }
             });
             guestDTOS = getAllGuests();
             return guestDTOS;
@@ -54,7 +57,7 @@ public class GuestService {
                 Guest guest = findByFullName(name);
                 if (guest != null) {
                     log.info("Guest to be deleted: {} ", guest.getFullName());
-                    guestRepository.delete(guest);
+                    deleteGuest(guest);
                 }
             });
             return getAllGuests();
@@ -68,5 +71,10 @@ public class GuestService {
 
     public boolean isGuestFullNameUnique(String aktionskennzeichen) {
         return !guestRepository.existsByGuestFullName(aktionskennzeichen);
+    }
+
+    @Transactional
+    private void deleteGuest(Guest guest) {
+        guestRepository.delete(guest);
     }
 }
