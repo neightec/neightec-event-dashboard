@@ -33,11 +33,13 @@ public class GuestService {
         if (!guests.isEmpty()) {
             List<GuestDTO> guestDTOS;
             guests.forEach(name -> {
-                Guest guest = new Guest();
-                guest.setFullName(name);
-                guest.setValidStart(Instant.now());
-                guest.setAttendanceStatus(GuestAttendanceEnum.ATTENDING.getName());
-                guestRepository.save(guest);
+                if (findByFullName(name) == null) {
+                    Guest guest = new Guest();
+                    guest.setFullName(name);
+                    guest.setValidStart(Instant.now());
+                    guest.setAttendanceStatus(GuestAttendanceEnum.ATTENDING.getName());
+                    guestRepository.save(guest);
+                }
             });
             guestDTOS = getAllGuests();
             return guestDTOS;
@@ -55,7 +57,7 @@ public class GuestService {
                 Guest guest = findByFullName(name);
                 if (guest != null) {
                     log.info("Guest to be deleted: {} ", guest.getFullName());
-                    guestRepository.delete(guest);
+                    deleteGuest(guest);
                 }
             });
             return getAllGuests();
@@ -71,8 +73,12 @@ public class GuestService {
         return !guestRepository.existsByGuestFullName(aktionskennzeichen);
     }
 
-    @Transactional
     public Guest saveGuest(Guest guest) {
-        return guestRepository.save(guest);
+        return guestRepository.save(guest); 
+    }
+    
+    @Transactional
+    private void deleteGuest(Guest guest) {
+        guestRepository.delete(guest);
     }
 }
