@@ -4,6 +4,7 @@ import { ModalService } from 'carbon-components-angular';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 import { RegisterGuestDialogComponent } from '../../components/register-guest-dialog/register-guest-dialog.component';
 import { FileItem } from 'src/app/models/file-item.model';
+import { addDashboardFiles } from '../../store/dashboard.actions';
 
 @Component({
   selector: 'neight-tech-dashboard-overview',
@@ -12,7 +13,7 @@ import { FileItem } from 'src/app/models/file-item.model';
 })
 export class DashboardOverviewComponent implements OnInit {
 
-  @Output() addFiles = new EventEmitter<FileItem[]>();
+  addFiles: FileItem[] = [];
 
   dragOver: boolean = false;
   accept = ['.pdf', '.doc', '.docx'];
@@ -72,23 +73,22 @@ export class DashboardOverviewComponent implements OnInit {
     return fileItem;
   }
 
-  onDrop(event: any, external: boolean) {
+  onDrop(event: any) {
     event.stopPropagation();
     event.preventDefault();
 
     const valid: boolean = this.checkFileAcceptenceOnDrag(event,  this.accept);
 
-    if (valid) {
-      this.addFiles.emit(
-        Array.from(event.dataTransfer.files).map((file: any) => this.createFileItem(file))
-      );
-    }
+    Array.from(event.dataTransfer.files).forEach((file: any) => {
+      this.checkDuplicationInQueue(file, this.addFiles);
+    });
 
     if (this.dragOver) {
       this.dragOver = !this.dragOver;
     }
   }
 
+  // TODO the implementation
   checkFileAcceptenceOnDrag(event: any, acceptedFormats: string[]): boolean {
     const files: any = event.dataTransfer?.files;
 
@@ -99,6 +99,18 @@ export class DashboardOverviewComponent implements OnInit {
       return valid !== -1;
     } else {
       return false;
+    }
+  }
+
+  addDashboardFiles(files: FileItem[]): void {
+    this.store.dispatch(addDashboardFiles({files}));
+  }
+
+  private checkDuplicationInQueue(fileToAdd: FileItem, files: FileItem[]): void {
+    const fileNames = new Set(files.map(file => file.name));
+  
+    if (!fileNames.has(fileToAdd.name)) {
+      files.push(fileToAdd);
     }
   }
 

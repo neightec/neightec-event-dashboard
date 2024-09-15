@@ -5,11 +5,13 @@
   <div
     id="fileContainer"
     [ngClass]="{'cds--file__drop-container--drag-over': dragOver}"
+    (click)="fileInput.click()"
     (dragover)="onDragOver($event)"
     (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
     >
     Upload file via CSV File
-    <input #fileInput type="file" class="bx--file-input" multiple [accept]="true" tabindex="-1"/>
+    <input #fileInput type="file" class="bx--file-input input-hide" multiple [accept]="true" tabindex="-1"/>
   </div>
   <div>
     <button
@@ -19,5 +21,13 @@
       Register Guest Manually
     </button>
     <ibm-placeholder></ibm-placeholder>
+  </div>
+</div>
+<div class="dashboard-overview-controls">
+  <h6>Files to upload</h6>
+  <div>
+    <ng-container *ngFor="let fileItem of addFiles">
+      {{ fileItem.name }}
+    </ng-container>
   </div>
 </div>

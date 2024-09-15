@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { GuestDTO } from "src/app/dto/GuestDTO";
+import { FileItem } from "src/app/models/file-item.model";
 
 enum DashboardActions { 
   InitDashboard = '[Dashboard] Init',
@@ -8,6 +9,7 @@ enum DashboardActions {
   LoadDataDashboardStateError = '[Core] Load Data Dashboard Error',
   LoadDataGuestAfterDeleteStateSuccess = '[Core] Load Data Guest Dashboard After Delete success',
   LoadDataGuestAfterDeleteStateFailure = '[Core] Load Data Guest Dashboard After Delete failure',
+  AddDashboardFiles = '[Core] Add Files in Dashboard',
 }
 
 export const initDashboard = createAction(DashboardActions.InitDashboard, props<{ data: GuestDTO[] }>());
@@ -33,4 +35,9 @@ export const updateDataDashboard = createAction(
 export const deleteGuestsFrom = createAction(
   '[Dashboard Actions] delete guest to dashboard',
   props<{guests: string[]}>()
+);
+
+export const addDashboardFiles = createAction(
+  DashboardActions.AddDashboardFiles,
+  props<{ files: FileItem[] }>()
 );
