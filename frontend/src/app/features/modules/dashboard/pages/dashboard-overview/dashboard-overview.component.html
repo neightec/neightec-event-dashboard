@@ -23,11 +23,26 @@
     <ibm-placeholder></ibm-placeholder>
   </div>
 </div>
-<div class="dashboard-overview-controls">
+<div class="dashboard-upload-files-controls">
   <h6>Files to upload</h6>
   <div>
     <ng-container *ngFor="let fileItem of addFiles">
-      {{ fileItem.name }}
+      <div>
+        <label>
+          {{ fileItem.name }}
+        </label>
+        <button (click)="deleteFile(fileItem)" >
+          <svg class="bx--btn__icon" ibmIcon="trash-can" size="16" fill="green"></svg>
+        </button>
+      </div>
     </ng-container>
+  </div>
+  <div>
+    <button
+    [disabled]="this.addFiles.length == 0"
+    ibmButton="primary"
+    (click)="uploadFiles()">
+      Upload Files
+    </button>
   </div>
 </div>

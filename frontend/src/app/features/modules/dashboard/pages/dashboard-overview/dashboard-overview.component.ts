@@ -33,7 +33,6 @@ export class DashboardOverviewComponent implements OnInit {
   onDragOver(event: any) {
     event.stopPropagation();
     event.preventDefault();
-    console.warn("test dragOver");
 
     this.dragOver = true;
   }
@@ -114,4 +113,13 @@ export class DashboardOverviewComponent implements OnInit {
     }
   }
 
+  uploadFiles(): void {
+    if (this.addFiles) {
+      this.store.dispatch(addDashboardFiles({files: this.addFiles}));
+    }
+  }
+
+  deleteFile(fileItem: FileItem): void {
+    this.addFiles = this.addFiles.filter(file => file.name !== fileItem.name);
+  }
 }

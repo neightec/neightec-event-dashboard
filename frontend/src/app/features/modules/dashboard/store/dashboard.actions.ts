@@ -10,6 +10,7 @@ enum DashboardActions {
   LoadDataGuestAfterDeleteStateSuccess = '[Core] Load Data Guest Dashboard After Delete success',
   LoadDataGuestAfterDeleteStateFailure = '[Core] Load Data Guest Dashboard After Delete failure',
   AddDashboardFiles = '[Core] Add Files in Dashboard',
+  UploadDashboardFiles = '[Core] Upload Files in Dashboard',
 }
 
 export const initDashboard = createAction(DashboardActions.InitDashboard, props<{ data: GuestDTO[] }>());
@@ -38,6 +39,11 @@ export const deleteGuestsFrom = createAction(
 );
 
 export const addDashboardFiles = createAction(
+  DashboardActions.AddDashboardFiles,
+  props<{ files: FileItem[] }>()
+);
+
+export const uploadDashboardFiles = createAction(
   DashboardActions.AddDashboardFiles,
   props<{ files: FileItem[] }>()
 );
