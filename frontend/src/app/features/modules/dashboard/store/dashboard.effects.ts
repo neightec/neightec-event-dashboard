@@ -48,7 +48,7 @@ export class DashboardEffects {
     return this.actions$.pipe(
       ofType(uploadDashboardFiles),
       mergeMap(action => {
-        return this.guestService.enterGuestToWeddingListManual(action.files).pipe(
+        return this.guestService.enterGuestToWeddingListUpload(action.files).pipe(
           map(response => loadDataDashboardStateSuccess({ data: response })),
           catchError(() => of(loadDataDashboardStateError()))
         )

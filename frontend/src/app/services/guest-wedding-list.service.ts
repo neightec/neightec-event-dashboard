@@ -5,6 +5,7 @@ import { NeightApiService } from 'src/neight-api.service';
 // import { mockGuests } from '../mock-data/mock-data.helper';
 import { neightEnvironment } from 'src/environments/environment';
 import { GuestDTO } from '../dto/GuestDTO';
+import { FileItem } from '../models/file-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,17 @@ export class GuestWeddingListService {
     try {
       const url = `${this.apiEndpoint}guest/add-list-manual`;
       const body = JSON.stringify(guests);
+      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public enterGuestToWeddingListUpload(files: FileItem[]): Observable<GuestDTO[]> {
+    try {
+      const url = `${this.apiEndpoint}guest/add-list-upload`;
+      const body = JSON.stringify(files);
       const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
       return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
     } catch (e) {
