@@ -78,8 +78,10 @@ public class GuestController {
      * @return list of guestWedding
      */
     @PostMapping(value = "/add-list-upload", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GuestDTO>> addGuestDashboardListViaUpload(@RequestParam("file") MultipartFile file) {
-        log.info("Add list via upload for Guest Wedding Dashboard from File {}", file.getOriginalFilename());
+    public ResponseEntity<List<GuestDTO>> addGuestDashboardListViaUpload(@RequestParam("files") List<MultipartFile> files) {
+        files.forEach(file -> {
+            log.info("Received file: {}", file.getOriginalFilename());
+        });
         return ResponseEntity.ok(null);
     }
 
