@@ -4,7 +4,7 @@ import { ModalService } from 'carbon-components-angular';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 import { RegisterGuestDialogComponent } from '../../components/register-guest-dialog/register-guest-dialog.component';
 import { FileItem } from 'src/app/models/file-item.model';
-import { addDashboardFiles } from '../../store/dashboard.actions';
+import { addDashboardFiles, uploadDashboardFiles } from '../../store/dashboard.actions';
 
 @Component({
   selector: 'neight-tech-dashboard-overview',
@@ -115,7 +115,7 @@ export class DashboardOverviewComponent implements OnInit {
 
   uploadFiles(): void {
     if (this.addFiles) {
-      this.store.dispatch(addDashboardFiles({files: this.addFiles}));
+      this.store.dispatch(uploadDashboardFiles({files: this.addFiles}));
     }
   }
 

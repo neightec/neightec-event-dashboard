@@ -43,16 +43,14 @@ export class GuestWeddingListService {
     }
   }
 
-  public enterGuestToWeddingListUpload(files: FileItem[]): Observable<GuestDTO[]> {
-    try {
-      const url = `${this.apiEndpoint}guest/add-list-upload`;
-      const body = JSON.stringify(files);
-      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-      return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
-    } catch (e) {
-      throw e;
-    }
-  }
+  enterGuestToWeddingListUpload(files: any): Observable<GuestDTO[]> {
+    const url = `${this.apiEndpoint}guest/add-list-upload`;
+    const formData = new FormData();
+    files.forEach((file, index) => {
+      formData.append(`file`, file);
+    });
+    return this.http.post<GuestDTO[]>(url, formData);
+}
 
   deleteGuests(guestLists: string[]): Observable<GuestDTO[]> {
     try {

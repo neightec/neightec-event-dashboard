@@ -74,13 +74,13 @@ public class GuestController {
 
     /**
      * REST post to upload list of guests from specific user
-     * @param guests list of guest
+     * @param file for uploading
      * @return list of guestWedding
      */
     @PostMapping(value = "/add-list-upload", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GuestDTO>> addGuestDashboardListViaUpload(@RequestBody List<String> guests) {
-        log.info("Add list via upload for Guest Wedding Dashboard from File {}", guests);
-        return ResponseEntity.ok(guestService.addGuests(guests));
+    public ResponseEntity<List<GuestDTO>> addGuestDashboardListViaUpload(@RequestParam("file") MultipartFile file) {
+        log.info("Add list via upload for Guest Wedding Dashboard from File {}", file.getOriginalFilename());
+        return ResponseEntity.ok(null);
     }
 
     /**
