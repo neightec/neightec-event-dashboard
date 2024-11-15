@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { catchError, combineLatest, forkJoin, map, mergeMap, of, switchMap } from 'rxjs';
-import { deleteGuestsFrom, initDashboard, loadDataDashboardState, loadDataDashboardStateError, loadDataDashboardStateSuccess, loadDataGuestAfterDeleteStateError, loadDataGuestAfterDeleteStateSuccess, updateDataDashboard } from "./dashboard.actions";
+import { addDashboardFiles, deleteGuestsFrom, initDashboard, loadDataDashboardState, loadDataDashboardStateError, loadDataDashboardStateSuccess, loadDataGuestAfterDeleteStateError, loadDataGuestAfterDeleteStateSuccess, updateDataDashboard, uploadDashboardFiles } from "./dashboard.actions";
 import { GuestWeddingListService } from "src/app/services/guest-wedding-list.service";
 import { GuestDTO } from "src/app/dto/GuestDTO";
+import { Store } from "@ngrx/store";
+import { selectDashboard } from "./dashboard.selectors";
 
 @Injectable()
 export class DashboardEffects { 
@@ -44,8 +46,22 @@ export class DashboardEffects {
     );
   });
 
+  uploadGuestList$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(uploadDashboardFiles),
+      concatLatestFrom(() => this.store.select(selectDashboard)),
+      mergeMap(([{ files }]) => {
+        return this.guestService.enterGuestToWeddingListUpload(files).pipe(
+          map(response => loadDataDashboardStateSuccess({ data: response })),
+          catchError(() => of(loadDataDashboardStateError()))
+        )
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
+    private store: Store,
     private guestService: GuestWeddingListService
   ) {}
 }

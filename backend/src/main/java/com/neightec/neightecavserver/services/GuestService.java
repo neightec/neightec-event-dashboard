@@ -73,6 +73,10 @@ public class GuestService {
         return !guestRepository.existsByGuestFullName(aktionskennzeichen);
     }
 
+    public Guest saveGuest(Guest guest) {
+        return guestRepository.save(guest); 
+    }
+    
     @Transactional
     private void deleteGuest(Guest guest) {
         guestRepository.delete(guest);

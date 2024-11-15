@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { Observable, lastValueFrom, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NeightApiService } from 'src/neight-api.service';
-import { mockGuests } from '../mock-data/mock-data.helper';
+// import { mockGuests } from '../mock-data/mock-data.helper';
 import { neightEnvironment } from 'src/environments/environment';
 import { GuestDTO } from '../dto/GuestDTO';
+import { FileItem } from '../models/file-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,15 @@ export class GuestWeddingListService {
     }
   }
 
+  enterGuestToWeddingListUpload(files: any): Observable<GuestDTO[]> {
+    const url = `${this.apiEndpoint}guest/add-list-upload`;
+    const formData = new FormData();
+    files.forEach(file => {
+      formData.append('files', file);
+    });
+    return this.http.post<GuestDTO[]>(url, formData);
+}
+
   deleteGuests(guestLists: string[]): Observable<GuestDTO[]> {
     try {
       const url = `${this.apiEndpoint}guest/delete-guests-by-fullnames`;
@@ -58,6 +68,17 @@ export class GuestWeddingListService {
       const url = `${this.apiEndpoint}guest/is-guest-full-name-unique?full_name=${fullName}`
       const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
       return this.http.get<boolean>(url, {headers: httpHeaders});
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public uploadGuestFromFiles(guests: string[]): Observable<GuestDTO[]> {
+    try {
+      const url = `${this.apiEndpoint}guest/add-list-via-upload`;
+      const body = JSON.stringify(guests);
+      const httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.post<GuestDTO[]>(url, body, {headers: httpHeaders});
     } catch (e) {
       throw e;
     }

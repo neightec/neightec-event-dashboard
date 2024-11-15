@@ -18,6 +18,7 @@
 		<liquibase.version>4.20.0</liquibase.version>
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
 		<org.projectlombok.version>1.18.22</org.projectlombok.version>
+		<spock.version>2.3-groovy-4.0</spock.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -108,6 +109,23 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-full</artifactId>
 			<version>5.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency> <!-- use a specific Groovy version rather than the one specified by spock-core -->
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-spring</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
