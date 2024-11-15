@@ -2,6 +2,7 @@ package com.neightec.neightecavserver.controller;
 
 import com.neightec.neightecavserver.models.dto.GuestDTO;
 import com.neightec.neightecavserver.models.enums.GuestAttendanceEnum;
+import com.neightec.neightecavserver.services.FileStorageService;
 import com.neightec.neightecavserver.services.GuestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class GuestController {
 
     private final GuestService guestService;
+    private final FileStorageService fileStorageService;
 
     /**
      * unlikely to use for MVP, just to prepare
@@ -74,15 +76,16 @@ public class GuestController {
 
     /**
      * REST post to upload list of guests from specific user
-     * @param file for uploading
+     * @param files for uploading
      * @return list of guestWedding
      */
     @PostMapping(value = "/add-list-upload", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GuestDTO>> addGuestDashboardListViaUpload(@RequestParam("files") List<MultipartFile> files) {
+    public ResponseEntity<String> addGuestDashboardListViaUpload(@RequestParam("files") List<MultipartFile> files) {
         files.forEach(file -> {
             log.info("Received file: {}", file.getOriginalFilename());
+            fileStorageService.uploadFile(file);
         });
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok("File read to upload some guests");
     }
 
     /**
