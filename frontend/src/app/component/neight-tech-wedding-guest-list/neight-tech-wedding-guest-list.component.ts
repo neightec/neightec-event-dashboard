@@ -18,6 +18,7 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   readonly itemsPerPageOptions: number[] = [10, 15, 20, 30, 50, 100];
   private selectedRows: number[] = [];
   private selectedGuests: string[] = [];
+  searchValue = "";
 
   tableData$;
 
@@ -60,6 +61,8 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
         this.loadTableDatasource();
       }
     });
+    this.initTableFiltering();
+
   }
 
   ngOnDestroy(): void {
@@ -164,6 +167,16 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
       const idx = this.selectedGuests.indexOf(dataTable[index?.deselectedRowIndex][0].data);
       this.selectedGuests.splice(idx, 1);
     }
-		console.log("onSelectRow selected:", index, selectedRowType, this.selectedRows);
+	}
+
+  initTableFiltering() {
+    this.guestWeddingModel.isRowFiltered = (index: number) => {
+			const nodeName = this.guestWeddingModel.row(index)[0].data;
+			return !nodeName.toLowerCase().includes(this.searchValue.toLowerCase());
+		};
+  }
+
+  filterNames(searchString: string) {
+    this.searchValue = searchString;
 	}
 }

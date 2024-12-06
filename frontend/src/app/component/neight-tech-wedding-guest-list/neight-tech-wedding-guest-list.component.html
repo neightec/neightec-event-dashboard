@@ -5,6 +5,13 @@
     [size]="'md'"
     (cancel)="cancel()"
     #toolbar>
+    <ibm-table-toolbar-content>
+      <ibm-table-toolbar-search
+        [expandable]="false"
+        (valueChange)="filterNames($event)"
+        (clear)="searchValue = ''">
+      </ibm-table-toolbar-search>
+    </ibm-table-toolbar-content>
     <ibm-table-toolbar-actions>
         <button cdsButton="primary" 
             [tabindex]="toolbar.selected ? 0 : -1" (click)="deleteGuests()">
