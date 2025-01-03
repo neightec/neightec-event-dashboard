@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { GuestWeddingListService } from 'src/app/services/guest-wedding-list.service';
 import * as dashboardActions from '../../features/modules/dashboard/store/dashboard.actions';
 import * as dashboardSelector from '../../features/modules/dashboard/store/dashboard.selectors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'neight-tech-wedding-guest-list',
@@ -46,7 +47,9 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
   
   constructor(
     private store: Store,
-    protected guestWeddingListService: GuestWeddingListService
+    private readonly translate: TranslateService,
+    protected guestWeddingListService: GuestWeddingListService,
+
   ) {}
 
   ngOnInit(): void {
@@ -73,9 +76,9 @@ export class NeightTechWeddingGuestListComponent implements OnInit {
 
   private createTableHeader(): TableHeaderItem[] {
     return [
-      new TableHeaderItem({data: 'Name'}), // must be unique like aktionskennzeichenValidator in ergoat
-      new TableHeaderItem({data: 'Status'}),
-      new TableHeaderItem({data: 'Date'}),
+      new TableHeaderItem({data: this.translate.instant('GuestList.Name')}),
+      new TableHeaderItem({data: this.translate.instant('GuestList.Status')}),
+      new TableHeaderItem({data: this.translate.instant('GuestList.Date')}),
     ];
   }
 
