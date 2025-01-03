@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +50,13 @@ import {
   ThemeModule
 } from 'carbon-components-angular';
 
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateModuleConfig,
+  TranslateService,
+} from '@ngx-translate/core';
+
 // @ts-ignore
 import * as Icons from '@carbon/icons';
 import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
@@ -60,6 +67,31 @@ import * as dashboardReducer from './features/modules/dashboard/store/dashboard.
 import { UploadButtonFilesComponent } from './features/modules/dashboard/components/upload-button-files/upload-button-files.component';
 import { DashboardOverviewComponent } from './features/modules/dashboard/pages/dashboard-overview/dashboard-overview.component';
 import { RegisterGuestDialogComponent } from './features/modules/dashboard/components/register-guest-dialog/register-guest-dialog.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { of } from 'rxjs';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+export const translateModuleConfig: TranslateModuleConfig = {
+  defaultLanguage: 'de',
+  isolate: false,
+  loader: {
+    provide: TranslateLoader,
+    useFactory: HttpLoaderFactory,
+    deps: [HttpClient],
+  },
+};
+
+export function initializeTranslation(translate: TranslateService) {
+  return () => {
+    if (translateModuleConfig.defaultLanguage) {
+      return translate.use(translateModuleConfig.defaultLanguage).toPromise();
+    }
+    return of(true).toPromise();
+  };
+}
 
 @NgModule({
     imports: [
@@ -75,6 +107,7 @@ import { RegisterGuestDialogComponent } from './features/modules/dashboard/compo
         EffectsModule.forFeature([
           DashboardEffects,
         ]),
+        TranslateModule.forRoot(translateModuleConfig),
         IconModule,
         UIShellModule,
         ThemeModule,
@@ -103,6 +136,12 @@ import { RegisterGuestDialogComponent } from './features/modules/dashboard/compo
       LoginService,
       FetchGuestService,
       { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
+      {
+        provide: APP_INITIALIZER,
+        useFactory: initializeTranslation,
+        deps: [TranslateService],
+        multi: true,
+      },
     ],
     bootstrap: [AppComponent]
 })
