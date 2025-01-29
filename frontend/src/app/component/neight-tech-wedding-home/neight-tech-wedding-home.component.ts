@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
+import { NeightApiService } from 'src/neight-api.service';
 
 @Component({
   selector: 'neight-tech-wedding-home',
@@ -6,6 +10,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./neight-tech-wedding-home.component.scss']
 })
 export class NeightTechWeddingHomeComponent {
+
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    protected loginService: LoginService,
+    protected neightApi: NeightApiService) {
+  }
 
   theme = 'g90';
 
@@ -42,5 +53,12 @@ export class NeightTechWeddingHomeComponent {
 
   public changeRouter(): void {
     console.warn("test changeRouter");
+  }
+
+  // TODO move this to another component
+  // i.e. directly in app component 
+  login(): void {
+    debugger;
+    this.loginService.login();
   }
 }

@@ -19,6 +19,7 @@
 		<org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
 		<org.projectlombok.version>1.18.22</org.projectlombok.version>
 		<spock.version>2.3-groovy-4.0</spock.version>
+		<jjwt-api.version>0.12.6</jjwt-api.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -127,7 +128,20 @@
 			<version>${spock.version}</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator-autoconfigure</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt-api.version}</version>
+		</dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>

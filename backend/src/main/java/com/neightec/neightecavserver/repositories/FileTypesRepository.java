@@ -1,7 +1,6 @@
 package com.neightec.neightecavserver.repositories;
 
 import com.neightec.neightecavserver.models.neightec_data.FileTypes;
-import com.neightec.neightecavserver.models.neightec_data.NeightecUsers;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

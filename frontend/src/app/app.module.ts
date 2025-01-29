@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -68,7 +68,10 @@ import { UploadButtonFilesComponent } from './features/modules/dashboard/compone
 import { DashboardOverviewComponent } from './features/modules/dashboard/pages/dashboard-overview/dashboard-overview.component';
 import { RegisterGuestDialogComponent } from './features/modules/dashboard/components/register-guest-dialog/register-guest-dialog.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { of } from 'rxjs';
+import { catchError, of, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './auth/auth.service';
+import { ACCESS_TOKEN_HEADER_KEY } from './models/auth.model';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -91,6 +94,39 @@ export function initializeTranslation(translate: TranslateService) {
     }
     return of(true).toPromise();
   };
+}
+
+export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+  const authService = inject(AuthService);
+  const toastrService = inject(ToastrService);
+
+  const authToken = authService.getAccessToken();
+
+  if (authToken) {
+    req = req.clone({
+      setHeaders: {
+        [ACCESS_TOKEN_HEADER_KEY] : `Bearer ${authToken}`,
+      },
+    });
+  }
+
+  return next(req)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 403) {
+          authService.logout();
+        }
+
+        const errorMessage = JSON.stringify(error.error, null, '\t');
+        toastrService.error(errorMessage, 'Error!').onHidden
+          .subscribe(() => {
+            authService.logout();
+          });
+
+        return throwError(() => error);
+      })
+    )
+
 }
 
 @NgModule({
