@@ -72,6 +72,7 @@ import { catchError, of, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth/auth.service';
 import { ACCESS_TOKEN_HEADER_KEY } from './models/auth.model';
+import { NeightTechLoginComponent } from './component/neight-tech-login/neight-tech-login.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -166,6 +167,7 @@ export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<un
         UploadButtonFilesComponent,
         DashboardOverviewComponent,
         RegisterGuestDialogComponent,
+        NeightTechLoginComponent,
     ],
     providers: [
       NeightApiService,

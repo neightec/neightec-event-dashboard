@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 @Log4j2
 @RequiredArgsConstructor
 public class AuthController {
@@ -29,8 +29,8 @@ public class AuthController {
      * REST delete guests by fullnames
      * @return boolean response entity
      */
-    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NeightecUser> deleteGuestsByFullnames() {
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<NeightecUser> login() {
         log.info("login called!");
         return ResponseEntity.ok(neightecUserService.login());
     }

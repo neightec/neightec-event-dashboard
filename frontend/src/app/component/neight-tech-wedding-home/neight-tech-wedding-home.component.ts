@@ -58,7 +58,6 @@ export class NeightTechWeddingHomeComponent {
   // TODO move this to another component
   // i.e. directly in app component 
   login(): void {
-    debugger;
     this.loginService.login();
   }
 }
