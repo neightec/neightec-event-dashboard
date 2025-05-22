@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { catchError, combineLatest, forkJoin, map, mergeMap, of, switchMap } from 'rxjs';
 import { addDashboardFiles, deleteGuestsFrom, initDashboard, loadDataDashboardState, loadDataDashboardStateError, loadDataDashboardStateSuccess, loadDataGuestAfterDeleteStateError, loadDataGuestAfterDeleteStateSuccess, updateDataDashboard, uploadDashboardFiles } from "./dashboard.actions";
 import { GuestWeddingListService } from "src/app/services/guest-wedding-list.service";
