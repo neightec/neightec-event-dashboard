@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -131,12 +131,10 @@ export function initializeTranslation(translate: TranslateService) {
         LoginService,
         FetchGuestService,
         { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeTranslation,
-            deps: [TranslateService],
-            multi: true,
-        },
+        provideAppInitializer(() => {
+        const initializerFn = (initializeTranslation)(inject(TranslateService));
+        return initializerFn();
+      }),
         provideHttpClient(withInterceptorsFromDi()),
     ] })
 export class AppModule { 

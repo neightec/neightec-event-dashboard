@@ -10,7 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'neight-tech-wedding-guest-list',
   templateUrl: './neight-tech-wedding-guest-list.component.html',
-  styleUrls: ['./neight-tech-wedding-guest-list.component.scss']
+  styleUrls: ['./neight-tech-wedding-guest-list.component.scss'],
+  standalone: false
 })
 export class NeightTechWeddingGuestListComponent implements OnInit {
   

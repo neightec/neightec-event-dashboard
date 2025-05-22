@@ -9,7 +9,8 @@ import { addDashboardFiles, uploadDashboardFiles } from '../../store/dashboard.a
 @Component({
   selector: 'neight-tech-dashboard-overview',
   templateUrl: './dashboard-overview.component.html',
-  styleUrls: ['./dashboard-overview.component.scss']
+  styleUrls: ['./dashboard-overview.component.scss'],
+  standalone: false
 })
 export class DashboardOverviewComponent implements OnInit {
 
