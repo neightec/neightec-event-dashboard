@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -97,43 +97,17 @@ export function initializeTranslation(translate: TranslateService) {
   };
 }
 
-export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
-  const authService = inject(AuthService);
-  const toastrService = inject(ToastrService);
-
-  const authToken = authService.getAccessToken();
-
-  if (authToken) {
-    req = req.clone({
-      setHeaders: {
-        [ACCESS_TOKEN_HEADER_KEY] : `Bearer ${authToken}`,
-      },
-    });
-  }
-
-  return next(req)
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 403) {
-          authService.logout();
-        }
-
-        const errorMessage = JSON.stringify(error.error, null, '\t');
-        toastrService.error(errorMessage, 'Error!').onHidden
-          .subscribe(() => {
-            authService.logout();
-          });
-
-        return throwError(() => error);
-      })
-    )
-
-}
-
-@NgModule({
-    imports: [
-        HttpClientModule,
-        BrowserModule,
+@NgModule({ declarations: [
+        AppComponent,
+        NeightWeddingPagenotfoundComponent,
+        NeightTechWeddingHomeComponent,
+        NeightTechWeddingDashboardComponent,
+        NeightTechWeddingGuestListComponent,
+        UploadButtonFilesComponent,
+        DashboardOverviewComponent,
+        RegisterGuestDialogComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
@@ -142,7 +116,7 @@ export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<un
         EffectsModule.forRoot([]),
         StoreModule.forFeature(dashboardReducer.dashboardReducerKey, dashboardReducer.dashboardReducer),
         EffectsModule.forFeature([
-          DashboardEffects,
+            DashboardEffects,
         ]),
         TranslateModule.forRoot(translateModuleConfig),
         IconModule,
@@ -156,33 +130,17 @@ export const authenticationInterceptor: HttpInterceptorFn = (req: HttpRequest<un
         ButtonModule,
         ModalModule,
         PlaceholderModule,
-        InputModule
-      ],
-      declarations: [
-        AppComponent,
-        NeightWeddingPagenotfoundComponent,
-        NeightTechWeddingHomeComponent,
-        NeightTechWeddingDashboardComponent,
-        NeightTechWeddingGuestListComponent,
-        UploadButtonFilesComponent,
-        DashboardOverviewComponent,
-        RegisterGuestDialogComponent,
-        NeightTechLoginComponent,
-    ],
-    providers: [
-      NeightApiService,
-      LoginService,
-      FetchGuestService,
-      { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
-      {
-        provide: APP_INITIALIZER,
-        useFactory: initializeTranslation,
-        deps: [TranslateService],
-        multi: true,
-      },
-    ],
-    bootstrap: [AppComponent]
-})
+        InputModule], providers: [
+        NeightApiService,
+        LoginService,
+        FetchGuestService,
+        { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
+        provideAppInitializer(() => {
+        const initializerFn = (initializeTranslation)(inject(TranslateService));
+        return initializerFn();
+      }),
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule { 
 
   groupedIcons: any[] = [];

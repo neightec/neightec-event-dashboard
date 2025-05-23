@@ -7,7 +7,8 @@ import { NeightApiService } from 'src/neight-api.service';
 @Component({
   selector: 'neight-tech-wedding-home',
   templateUrl: './neight-tech-wedding-home.component.html',
-  styleUrls: ['./neight-tech-wedding-home.component.scss']
+  styleUrls: ['./neight-tech-wedding-home.component.scss'],
+  standalone: false
 })
 export class NeightTechWeddingHomeComponent {
 

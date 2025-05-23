@@ -9,7 +9,8 @@ import { GuestFullnameValidator } from 'src/app/validators/guest-fullname.valida
 @Component({
   selector: 'neight-tech-register-guest-dialog',
   templateUrl: './register-guest-dialog.component.html',
-  styleUrls: ['./register-guest-dialog.component.scss']
+  styleUrls: ['./register-guest-dialog.component.scss'],
+  standalone: false
 })
 export class RegisterGuestDialogComponent extends BaseModal implements OnInit {
 

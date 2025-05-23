@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'neight-tech-wedding-dashboard',
   templateUrl: './neight-tech-wedding-dashboard.component.html',
-  styleUrls: ['./neight-tech-wedding-dashboard.component.scss']
+  styleUrls: ['./neight-tech-wedding-dashboard.component.scss'],
+  standalone: false
 })
 export class NeightTechWeddingDashboardComponent {
 
