@@ -1929,17 +1929,17 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.0.1"
     "@napi-rs/nice-win32-x64-msvc" "1.0.1"
 
-"@ngrx/effects@^18.1.1":
-  version "18.1.1"
-  resolved "https://registry.npmjs.org/@ngrx/effects/-/effects-18.1.1.tgz#df51cc2874e2470bfe073aa3e01f317977d8fd49"
-  integrity sha512-XXob8kYEvYMaZwgHtrrTW0XZargbu5PloEpNHLnzB8jPk0yWEw6keryxaF09Ylws1779MWvMmF/YP2rPl04nHQ==
+"@ngrx/effects@^19.2.0":
+  version "19.2.0"
+  resolved "https://registry.npmjs.org/@ngrx/effects/-/effects-19.2.0.tgz#2f63f7cf9d7293e482e428bcfe0c70af9d435510"
+  integrity sha512-DIoFdEdSehAMHUNTWIdl94HjhSh1ZRx0Rgtgp1TjHHyjLiS+vbMmDgPjrCkBv5lT/pEaKbHKnYxjY3CQiW2Hsg==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/entity@^18.1.1":
-  version "18.1.1"
-  resolved "https://registry.npmjs.org/@ngrx/entity/-/entity-18.1.1.tgz#9ca089080a2e684fd4955d3a6ad90047539b97ba"
-  integrity sha512-oRt/wG+szR4lMvMut16uWfbMD2CnOMscnQIbU+lcOs5+UDOzr4aHGBVpErzcoVWSTp/sl7x02j+2dto5NQZWoA==
+"@ngrx/entity@^19.2.0":
+  version "19.2.0"
+  resolved "https://registry.npmjs.org/@ngrx/entity/-/entity-19.2.0.tgz#d71861a64a60dde798dd0970c6e9071f3a44c0cf"
+  integrity sha512-JxKFBk0LAHrmCGLQFQeT8mZhwTZPKzq0m0gqCtXgmtzHj9B/ln3yluTtBWgOEf07dDAkEX/q42Sr+kO+5kctvg==
   dependencies:
     tslib "^2.0.0"
 
@@ -1950,10 +1950,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@ngrx/store@^18.1.1":
-  version "18.1.1"
-  resolved "https://registry.npmjs.org/@ngrx/store/-/store-18.1.1.tgz#e189967bd8d385ea48e14a7d96542cbf062e8382"
-  integrity sha512-K0v1akJ2sEnIeb1AUA064+ksgRgbMgVG9HbSsLBxENbFjK2ZvKRxo1bpOw6WHW9+hyDTlhZGl7+gUtjmo3497g==
+"@ngrx/store@^19.2.0":
+  version "19.2.0"
+  resolved "https://registry.npmjs.org/@ngrx/store/-/store-19.2.0.tgz#940fde6bc0fd4ae5c20bb4de53417b31b35db6dd"
+  integrity sha512-k2n/jLJZ75Z5rd5vPa2mXPYG/On2rFLiNdrccs9Dw2r+oJosORMlN5TbdsGHhVDFfjzbY9a7JbHUE3YOa69gqw==
   dependencies:
     tslib "^2.0.0"
 
