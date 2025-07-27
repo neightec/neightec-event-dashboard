@@ -10,7 +10,7 @@ const routes: Routes = [
   // { path: 'guest-check-validation/:id', component: NeightCheckGuestValidationComponent},
   // { path: 'admin',           component: NeightWeddingAdminComponent },
   { path: 'login',          component: NeightTechLoginComponent },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' }, //need to be declared before PageNotFound
+  { path: '',   redirectTo: '/home', pathMatch: 'full' }, //need to be declared before PageNotFound
   { path: '**',       component: NeightWeddingPagenotfoundComponent },    
 ];
 
