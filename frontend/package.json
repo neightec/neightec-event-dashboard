@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "production": "ng build --configuration production",
-    "start:electron": "ng build --base-href ./ && electron ."
+    "start:electron": "ng build --base-href ./ && electron .",
+    "cache-clean": "npx ng cache clean"
   },
   "private": true,
   "dependencies": {
