@@ -60,6 +60,7 @@ import {
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 // @ts-ignore
@@ -78,6 +79,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth/auth.service';
 import { ACCESS_TOKEN_HEADER_KEY } from './models/auth.model';
 import { NeightTechLoginComponent } from './component/neight-tech-login/neight-tech-login.component';
+import { NeightecHomeComponent } from './component/neightec-home/neightec-home.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader();
@@ -107,65 +109,70 @@ export function initializeTranslation(translate: TranslateService) {
 //   };
 // }
 
-@NgModule({ declarations: [
-        AppComponent,
-        NeightWeddingPagenotfoundComponent,
-        NeightTechWeddingHomeComponent,
-        NeightTechWeddingDashboardComponent,
-        NeightTechWeddingGuestListComponent,
-        UploadButtonFilesComponent,
-        DashboardOverviewComponent,
-        RegisterGuestDialogComponent,
-    ],
-    bootstrap: [AppComponent], 
-    imports: [
-        MatListModule,
-        MatSidenavModule,
-        MatButtonModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot([]),
-        StoreModule.forFeature(dashboardReducer.dashboardReducerKey, dashboardReducer.dashboardReducer),
-        EffectsModule.forFeature([
-            DashboardEffects,
-        ]),
-        TranslateModule.forRoot(translateModuleConfig),
-        IconModule,
-        UIShellModule,
-        ThemeModule,
-        SearchModule,
-        SkeletonModule,
-        TabsModule,
-        TableModule,
-        PaginationModule,
-        ButtonModule,
-        ModalModule,
-        PlaceholderModule,
-        InputModule
-      ], 
-      providers: [
-        NeightApiService,
-        LoginService,
-        FetchGuestService,
-        { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
-        {
-          provide: TRANSLATE_HTTP_LOADER_CONFIG,
-          useValue: {
-            prefix: './assets/i18n/',
-            suffix: '.json',
-          }
-        },
-        provideAppInitializer(() => {
-        const initializerFn = (initializeTranslation)(inject(TranslateService));
-        return initializerFn();
-      }),
-        provideHttpClient(withInterceptorsFromDi()),
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA], })
+@NgModule({ 
+  declarations: [
+    AppComponent,
+    NeightWeddingPagenotfoundComponent,
+    NeightTechWeddingHomeComponent,
+    NeightTechWeddingDashboardComponent,
+    NeightTechWeddingGuestListComponent,
+    UploadButtonFilesComponent,
+    DashboardOverviewComponent,
+    RegisterGuestDialogComponent,
+
+    //new components base on angular
+    NeightecHomeComponent,
+  ],
+  bootstrap: [AppComponent], 
+  imports: [
+    MatListModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatTabsModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreModule.forFeature(dashboardReducer.dashboardReducerKey, dashboardReducer.dashboardReducer),
+    EffectsModule.forFeature([
+        DashboardEffects,
+    ]),
+    TranslateModule.forRoot(translateModuleConfig),
+    IconModule,
+    UIShellModule,
+    ThemeModule,
+    SearchModule,
+    SkeletonModule,
+    TabsModule,
+    TableModule,
+    PaginationModule,
+    ButtonModule,
+    ModalModule,
+    PlaceholderModule,
+    InputModule
+    ], 
+    providers: [
+      NeightApiService,
+      LoginService,
+      FetchGuestService,
+      { provide: NEIGHT_CONFIG, useValue: neightEnvironment },
+      {
+        provide: TRANSLATE_HTTP_LOADER_CONFIG,
+        useValue: {
+          prefix: './assets/i18n/',
+          suffix: '.json',
+        }
+      },
+      provideAppInitializer(() => {
+      const initializerFn = (initializeTranslation)(inject(TranslateService));
+      return initializerFn();
+    }),
+      provideHttpClient(withInterceptorsFromDi()),
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], })
 export class AppModule { 
 
   groupedIcons: any[] = [];

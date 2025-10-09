@@ -1,0 +1,40 @@
+@use '@angular/material' as mat;
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+$mat-primary: (
+  main: purple,
+  lighter: #d7d3ee,
+  darker: #322966,
+  contrast: (
+    main: white,
+    lighter: white,
+    darker: white,
+  ),
+);
+
+
+$mat-accent: (
+  main: white,
+  lighter: #d7d3ee,
+  darker: #322966,
+  contrast: (
+    main: red,
+    lighter: white,
+    darker: white,
+  ),
+);
+
+$primary: mat.m2-define-palette($mat-primary, main, lighter, darker);
+$accent: mat.m2-define-palette($mat-accent, main, lighter, darker);
+
+$theme: mat.m2-define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+  )
+));
+
+@include mat.core();
+@include mat.all-component-themes($theme);
