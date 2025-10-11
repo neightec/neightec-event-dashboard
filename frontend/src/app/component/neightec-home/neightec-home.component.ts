@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDrawer, MatDrawerContainer, MatSidenavModule } from '@angular/material/sidenav';
-import { MatTabsModule } from '@angular/material/tabs';
+import { NeightecColumnTableData } from 'src/app/models/neightec-column-table.model';
 
 @Component({
   selector: 'neightec-home',
@@ -19,4 +18,9 @@ export class NeightecHomeComponent {
   
   showFiller = false;
 
+  columnTable: NeightecColumnTableData[] = [
+    { columnDef: 'name', header: 'GuestList.Name', key: 'name' },
+    { columnDef: 'attendanceStatus', header: 'GuestList.Status', key: 'attendanceStatus' },
+    { columnDef: 'date', header: 'GuestList.Date', key: 'date' },
+  ];
 }

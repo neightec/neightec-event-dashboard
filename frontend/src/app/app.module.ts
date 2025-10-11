@@ -61,6 +61,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 // @ts-ignore
@@ -80,6 +81,7 @@ import { AuthService } from './auth/auth.service';
 import { ACCESS_TOKEN_HEADER_KEY } from './models/auth.model';
 import { NeightTechLoginComponent } from './component/neight-tech-login/neight-tech-login.component';
 import { NeightecHomeComponent } from './component/neightec-home/neightec-home.component';
+import { NeightecTableComponent } from './component/neightec-table/neightec-table.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader();
@@ -122,6 +124,7 @@ export function initializeTranslation(translate: TranslateService) {
 
     //new components base on angular
     NeightecHomeComponent,
+    NeightecTableComponent,
   ],
   bootstrap: [AppComponent], 
   imports: [
@@ -129,6 +132,7 @@ export function initializeTranslation(translate: TranslateService) {
     MatSidenavModule,
     MatButtonModule,
     MatTabsModule,
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
