@@ -115,9 +115,9 @@ export function initializeTranslation(translate: TranslateService) {
   declarations: [
     AppComponent,
     NeightWeddingPagenotfoundComponent,
-    NeightTechWeddingHomeComponent,
-    NeightTechWeddingDashboardComponent,
-    NeightTechWeddingGuestListComponent,
+    // NeightTechWeddingHomeComponent,
+    // NeightTechWeddingDashboardComponent,
+    // NeightTechWeddingGuestListComponent,
     UploadButtonFilesComponent,
     DashboardOverviewComponent,
     RegisterGuestDialogComponent,

@@ -4,38 +4,4 @@
 // that you are using.
 // @include angular-material-theme($frontend-theme);
 
-//Global and basic scss
-// @import './app/styles/scss/global/global';
-
-// @import './app/styles/scss/carbon/theme';
-// @import './app/styles/scss/carbon/overwrites';
-
-
-//Stlyes
-// @import './app/styles/scss/component/component';
-// TODO delete carbon completely
-@use "@carbon/styles/scss/config" with (
-	// Use flexbox for grid - stick to CSS Grid or Flexbox
-	// CSS Grid has become the default grid system in v11
-	$use-flexbox-grid: true,
-  $font-path: '@ibm/plex'
-);
 @use 'app/styles/scss/angular/theme' as *;
-@use "@carbon/styles";
-
-.white {
-	@include styles.theme(styles.$white);
-}
-
-.g10 {
-	@include styles.theme(styles.$g10);
-}
-
-.g90 {
-	@include styles.theme(styles.$g90);
-}
-
-.g100 {
-	@include styles.theme(styles.$g100);
-}
-
