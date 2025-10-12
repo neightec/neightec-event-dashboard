@@ -78,6 +78,7 @@ import { AuthService } from './auth/auth.service';
 import { ACCESS_TOKEN_HEADER_KEY } from './models/auth.model';
 import { NeightecHomeComponent } from './component/neightec-home/neightec-home.component';
 import { NeightecTableComponent } from './component/neightec-table/neightec-table.component';
+import { NeightecUploadListComponent } from './component/neightec-upload-list/neightec-upload-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader();
@@ -118,6 +119,7 @@ export function initializeTranslation(translate: TranslateService) {
     //new components base on angular
     NeightecHomeComponent,
     NeightecTableComponent,
+    NeightecUploadListComponent,
   ],
   bootstrap: [AppComponent], 
   imports: [
