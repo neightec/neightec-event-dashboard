@@ -66,9 +66,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 // @ts-ignore
 import * as Icons from '@carbon/icons';
-import { NeightTechWeddingHomeComponent } from './component/neight-tech-wedding-home/neight-tech-wedding-home.component';
-import { NeightTechWeddingDashboardComponent } from './component/neight-tech-wedding-dashboard/neight-tech-wedding-dashboard.component';
-import { NeightTechWeddingGuestListComponent } from './component/neight-tech-wedding-guest-list/neight-tech-wedding-guest-list.component';
 import { DashboardEffects } from './features/modules/dashboard/store/dashboard.effects';
 import * as dashboardReducer from './features/modules/dashboard/store/dashboard.reducer';
 import { UploadButtonFilesComponent } from './features/modules/dashboard/components/upload-button-files/upload-button-files.component';
@@ -79,7 +76,6 @@ import { catchError, of, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth/auth.service';
 import { ACCESS_TOKEN_HEADER_KEY } from './models/auth.model';
-import { NeightTechLoginComponent } from './component/neight-tech-login/neight-tech-login.component';
 import { NeightecHomeComponent } from './component/neightec-home/neightec-home.component';
 import { NeightecTableComponent } from './component/neightec-table/neightec-table.component';
 
@@ -115,9 +111,6 @@ export function initializeTranslation(translate: TranslateService) {
   declarations: [
     AppComponent,
     NeightWeddingPagenotfoundComponent,
-    // NeightTechWeddingHomeComponent,
-    // NeightTechWeddingDashboardComponent,
-    // NeightTechWeddingGuestListComponent,
     UploadButtonFilesComponent,
     DashboardOverviewComponent,
     RegisterGuestDialogComponent,
