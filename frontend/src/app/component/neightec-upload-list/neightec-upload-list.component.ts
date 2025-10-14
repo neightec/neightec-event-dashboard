@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { addDashboardFiles, uploadDashboardFiles } from 'src/app/features/modules/dashboard/store/dashboard.actions';
 import { FileItem } from 'src/app/models/file-item.model';
+import { addDashboardFiles, uploadDashboardFiles } from 'src/app/features/modules/dashboard/store/dashboard.actions';
+import { NeightecDialogEntryDataComponent } from '../dialogs/neightec-dialog-entry-data/neightec-dialog-entry-data.component';
 
 @Component({
   selector: 'neightec-upload-list',
@@ -20,12 +22,11 @@ export class NeightecUploadListComponent {
 
   constructor(
     private store: Store,
-    // protected guestWeddingListService: GuestWeddingListService,
-    // protected modalService: ModalService
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    console.log("Init Dashboard Overview");
+
   }
 
   onDragOver(event: any) {
@@ -42,7 +43,11 @@ export class NeightecUploadListComponent {
     this.dragOver = false;
   }
 
-  registerGuestManuallyPopup(): void {
+  entryDataManually(): void {
+    this.dialog.open(NeightecDialogEntryDataComponent, {
+      disableClose: true,
+      data: null,
+    });
     // this.modalService.create({
     //   component: null,
     //   inputs: {
