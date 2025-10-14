@@ -13,3 +13,19 @@
 .home-sidenav {
   padding: 20px;
 }
+
+.list-container {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+
+  .list-table-container {
+    display: block;
+    width: 80%;
+  }
+  
+  .upload-list-container {
+    display: block;
+    width: 20%;
+  }
+}

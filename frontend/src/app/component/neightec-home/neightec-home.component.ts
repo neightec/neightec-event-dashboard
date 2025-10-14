@@ -17,6 +17,7 @@ export class NeightecHomeComponent {
   drawerContainer: MatDrawerContainer;
   
   showFiller = false;
+  selectedTabIndex: number = 1;
 
   columnTable: NeightecColumnTableData[] = [
     { columnDef: 'name', header: 'GuestList.Name', key: 'name' },
