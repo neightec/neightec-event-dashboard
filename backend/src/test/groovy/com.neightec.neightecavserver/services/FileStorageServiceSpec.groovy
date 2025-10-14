@@ -25,4 +25,22 @@ class FileStorageServiceSpec extends Specification {
         then:
         result == false
     }
+
+    // TODO upload file ist eher integration test, kein unit-test
+    def "upload file throws true when file is not null"() {
+        given:
+        def fileContainer = "Test Content".getBytes()
+        def file = new MockMultipartFile(
+                "testFile",
+                "test-file.csv",
+                "text/csv", // adjust content Type to have multiple content type
+                fileContainer
+        )
+
+        when:
+        def result = fileStorageService.uploadFile(file)
+
+        then:
+        result == true
+    }
 }
