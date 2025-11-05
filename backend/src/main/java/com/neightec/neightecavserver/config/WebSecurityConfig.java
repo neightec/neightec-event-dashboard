@@ -1,7 +1,9 @@
 package com.neightec.neightecavserver.config;
 
+import com.neightec.neightecavserver.auth.NeightecAuthDummyFilter;
 import com.neightec.neightecavserver.security.oauth2.OAuth2CustomFilter;
 import com.neightec.neightecavserver.services.NeightecUserService;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
@@ -14,9 +16,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.GenericFilterBean;
 
 
 @Configuration
@@ -32,6 +36,9 @@ public class WebSecurityConfig {
 
     @Autowired
     private CorsEndpointProperties corsConfig;
+
+    @Autowired
+    private AuthConfig authConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -53,6 +60,12 @@ public class WebSecurityConfig {
                                 jwt -> jwt.decoder(jwtDecoder)
                         )
                 )*/;
+
+        if (authConfig.getMode() != null && authConfig.getMode().equals("oauth2")) {
+            http.addFilterAt(new NeightecAuthDummyFilter(authConfig),
+                    AbstractPreAuthenticatedProcessingFilter.class);
+        }
+
         http.addFilterBefore(
                 new OAuth2CustomFilter(neightecUserService),
                 AnonymousAuthenticationFilter.class
@@ -72,5 +85,12 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @PostConstruct
+    public void validateAuthConfig() {
+        if (authConfig.getMode() == null || authConfig.getMode().isBlank()) {
+            throw new IllegalStateException("AuthConfig.mode should not be blank!!!");
+        }
     }
 }
