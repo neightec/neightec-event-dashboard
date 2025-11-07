@@ -26,7 +26,7 @@ import java.security.Principal;
 
             HttpServletRequestWrapper wrapper;
 
-            if (!this.authConfig.getDummyUser().equals("") && !this.authConfig.getDummyUser().isEmpty()) {
+            if (!this.authConfig.getDummyUser().isEmpty()) {
                 wrapper = getWrapper(request, authConfig.getDummyUser());
             } else {
                 String username = "test";
