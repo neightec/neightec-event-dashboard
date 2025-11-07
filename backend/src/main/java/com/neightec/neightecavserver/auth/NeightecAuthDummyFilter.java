@@ -26,8 +26,8 @@ public class NeightecAuthDummyFilter extends OncePerRequestFilter {
 
         HttpServletRequestWrapper wrapper;
 
-        if (!this.authConfig.getMode().isEmpty() && !this.authConfig.getDummyUser().isEmpty()) {
-            wrapper = getWrapper(request, authConfig.getDummyUser());
+        if (this.authConfig.getFakeUser() != null && !this.authConfig.getFakeUser().isEmpty()) {
+            wrapper = getWrapper(request, authConfig.getFakeUser());
         } else {
             String username = "test";
             wrapper = getWrapper(request, username);

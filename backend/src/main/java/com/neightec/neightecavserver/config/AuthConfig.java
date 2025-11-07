@@ -32,6 +32,6 @@ import org.springframework.web.filter.GenericFilterBean;
 public class AuthConfig {
 
     private String mode;
-    private String dummyUser;
+    private String fakeUser;
 
 }
