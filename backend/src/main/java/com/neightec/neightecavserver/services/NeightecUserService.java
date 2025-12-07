@@ -44,4 +44,11 @@ public class NeightecUserService {
         }
         return null;
     }
+
+    public NeightecUser setNewUser(String username) {
+        NeightecUser neightecUser = new NeightecUser();
+        neightecUser.setLastName(username);
+        neightecUser.setFirstName(username);
+        return neightecUser;
+    }
 }

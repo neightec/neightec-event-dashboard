@@ -44,15 +44,16 @@ public class OAuth2CustomFilter extends GenericFilterBean {
         }
 
         try {
-            String jwt = getJwtTokenFromRequest((HttpServletRequest) servletRequest); // is this fine on casting in HttpServletRequest
-            NeightecUser currentUser = this.neightecUserService.getCurrentUwbUser();
+            // TODO with JWT later
+//            String jwt = getJwtTokenFromRequest((HttpServletRequest) servletRequest); // is this fine on casting in HttpServletRequest
+//            NeightecUser currentUser = this.neightecUserService.getCurrentUwbUser();
 //            Authentication updatedAuthentication = neightecUserService.writeUwbRolesIntoAuthentication(currentUser);
-            Authentication updatedAuthentication = null;
+            Authentication updatedAuthentication = SecurityContextHolder.getContext().getAuthentication();
             if (updatedAuthentication == null) {
                 log.info("User is not authenticated");
             } else {
                 log.info("User is authenticated");
-                SecurityContextHolder.getContext().setAuthentication(updatedAuthentication);
+//                SecurityContextHolder.getContext().setAuthentication(updatedAuthentication);
             }
         } catch (IllegalArgumentException iae) {
             log.debug(iae.getMessage(), iae);

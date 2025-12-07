@@ -7,9 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
-//import javax.persistence.*;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +21,7 @@ import java.util.UUID;
 @Table(name="neightec_users")
 @Getter
 @Setter
-public class NeightecUser {
+public class NeightecUser implements Authentication {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -52,4 +55,43 @@ public class NeightecUser {
 
     @Column(name = "valid_end")
     private Instant validEnd;
+
+    @Transient
+    private List<GrantedAuthority> authorities;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public Object getCredentials() {
+        return null;
+    }
+
+    @Override
+    public Object getDetails() {
+        return null;
+    }
+
+    @Override
+    // TODO change this
+    public Object getPrincipal() {
+        return firstName + "-" + lastName;
+    }
+
+    @Override
+    public boolean isAuthenticated() {
+        return true;
+    }
+
+    @Override
+    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+    }
+
+    @Override
+    // TODO create extra column for username or whatever
+    public String getName() {
+        return firstName;
+    }
 }

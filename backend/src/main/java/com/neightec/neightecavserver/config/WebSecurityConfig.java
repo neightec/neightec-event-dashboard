@@ -1,6 +1,7 @@
 package com.neightec.neightecavserver.config;
 
 import com.neightec.neightecavserver.auth.NeightecAuthDummyFilter;
+import com.neightec.neightecavserver.auth.NeightecAuthFilter;
 import com.neightec.neightecavserver.security.oauth2.OAuth2CustomFilter;
 import com.neightec.neightecavserver.services.NeightecUserService;
 import jakarta.annotation.PostConstruct;
@@ -20,7 +21,6 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.GenericFilterBean;
 
 
 @Configuration
@@ -39,6 +39,9 @@ public class WebSecurityConfig {
 
     @Autowired
     private AuthConfig authConfig;
+
+    @Autowired
+    private NeightecAuthFilter neightecAuthFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -61,10 +64,9 @@ public class WebSecurityConfig {
                         )
                 )*/;
 
-        if (authConfig.getMode() != null && authConfig.getMode().equals("oauth2")) {
-            http.addFilterAt(new NeightecAuthDummyFilter(authConfig),
-                    AbstractPreAuthenticatedProcessingFilter.class);
-        }
+        http.addFilterAt(new NeightecAuthDummyFilter(authConfig),
+                AbstractPreAuthenticatedProcessingFilter.class);
+        http.addFilterAfter(neightecAuthFilter, AbstractPreAuthenticatedProcessingFilter.class);
 
         http.addFilterBefore(
                 new OAuth2CustomFilter(neightecUserService),
